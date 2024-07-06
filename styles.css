@@ -1,0 +1,50 @@
+:root {
+    --grid-item-size: 5vw;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f0f0f0;
+    user-select: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 99%;
+    height: auto;
+    background-color: aqua;
+}
+
+.grid-container {
+    height: auto;
+    width: 99vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-size), var(--grid-item-size)));
+    grid-auto-rows: var(--grid-item-size);
+    gap: 0.5vh;
+    justify-content: center;
+}
+
+.grid-item {
+    width: var(--grid-item-size);
+    height: var(--grid-item-size);
+    overflow: hidden;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
+}
