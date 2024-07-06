@@ -3,7 +3,7 @@ body{
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     height: 100vh;
     width: 100vw;
     background-color: #f0f0f0;
@@ -12,12 +12,89 @@ body{
 
 .content{
     display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
     width: 100%;
     height: 100%;
-    background-color: aqua;
 }
 
-.
+.colors {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 49vw;
+    margin-left: 1vw;
+    height: 100vh;
+/*     background-color: aqua;
+ */}
+
+.values{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 49vw;
+    margin-right: 1vw;
+    height: 100vh;
+/*     background-color: #e60000;
+ */}
+
+.value{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    height: 9vh;
+    border-radius: 10px;
+    margin-bottom: 1vh;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f0f0f0;
+    background-color: hwb(0 23% 77%);
+}
+
+.shades{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5vh;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f0f0f0;
+    transition: all 0.3s ease;
+    background-color: aliceblue;
+}
+
+.shade-4, .shade4{
+    width: 40vw;
+    height: 9vh;
+}
+
+.shade-3, .shade3{
+    width: 41vw;
+    height: 9vh;
+}
+
+.shade-2, .shade2{
+    width: 42vw;
+    height: 9vh;
+}
+
+.shade-1, .shade1{
+    width: 43vw;
+    height: 9vh;
+}
+
+.shade-0{
+    width: 44vw;
+    height: 9vh;
+}
+
+.shades:hover{
+    transform: scale(1.05);
+}
