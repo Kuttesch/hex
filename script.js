@@ -61,6 +61,8 @@ function main() {
 
 window.onload = main;
 
+// ### Event listener to append more divs when scrolling ### //
+
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   const viewportHeight = window.innerHeight;
