@@ -62,7 +62,12 @@ body{
     justify-content: center;
     align-items: center;
     width: 49vw;
-    height: 50vh;
+    height: 49vh;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+
+    /* border: 2px solid #000000;
+    border-radius: 20px; */
 } 
 
 .value{
@@ -94,16 +99,18 @@ body{
 
 }
 
-/* .suggestions {
+.suggestions {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     width: 49vw;
-    height: 50vh;
+    height: 49vh;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
 
-    border-radius: 20px;
-    border: 2px solid #000000;
+    /* border-radius: 20px;
+    border: 2px solid #000000; */
 
 
 }
@@ -112,47 +119,31 @@ body{
     font-size: 1.5em;
     font-weight: bold;
     color: #000000;
-    height: 5vh;
+    height: 4vh;
     width: 49vw;
     margin-bottom: 1vh;
     text-align: center;
 }
 
-.suggestion-1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 45vw;
-    height: 9vh;
-    margin-top: 1vh;
-    border-radius: 10px;
-    font-size: 1.5em;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #f0f0f0;
-    background-color: #c0c0c0;
-
-}
-
 .grid-container {
-    height: auto;
-    width: 45vw;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: center;
-    background-color: aqua;
-}
-
-.grid-item {
-    width: 15vh;
-    height: 10vh;
-    border-radius: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.1s ease;
-    background-color: brown;
-} */
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    grid-template-rows: 1fr repeat(3, 1fr); /* One larger row, then three equal rows */
+    gap: 1vh; /* Adjust the gap as needed */
+    height: 80%; /* Make the grid fill the viewport height */
+    width: 90%; /* Make the grid fill the viewport width */
+  }
+  
+  .grid-item:first-child {
+    grid-column: 1 / span 3; /* Span the first item across all columns */
+  }
+  
+  .grid-item {
+    background-color: #c0c0c0;
+    height: 100%; /* Make the grid items fill the grid cells */
+    width: 100%;
+    border-radius: 10px;
+  }
 
 .shades{
     display: flex;

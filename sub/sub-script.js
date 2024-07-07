@@ -1,3 +1,6 @@
+// import { randomUniqueHexColorCode, createAndAppendDiv } from '../script.js';
+
+
 function getHashValue() {
   const fullUrl = window.location.href; // Get the entire URL
   const hashIndex = fullUrl.indexOf('#'); // Find the position of "#"
@@ -207,14 +210,103 @@ function setSizeOnClick(divname) {
     console.log(Math.abs(div.position - focus.position));
     console.log('width: ' + div.style.width);
   }
+}
+
+function getMatchingColorsHSL(baseColorHEX) {
+  const baseColorHSL = calculateHSL(baseColorHEX);
+
+  console.log('baseColorHSL:', baseColorHSL);
+
+  const [hString, sString, lString] = baseColorHSL.split(",");
+
+  // Convert to numbers, removing the '%' and dividing by 100
+  const h = Number(hString);
+  const s = Number(sString.replace("%", "")) / 100;
+  const l = Number(lString.replace("%", "")) / 100;
+
+  // Check for valid values
+  if (isNaN(h) || isNaN(s) || isNaN(l)) {
+      throw new Error("Invalid HSL values");
+  }
+
+  console.log('hsl:', h, s, l);
+
+  let complementary = { h: (h + 180) % 360, s, l };
+  let analogous1 = { h: (h + 30) % 360, s, l };
+  let analogous2 = { h: (h - 30 + 360) % 360, s, l };
+  let triadic1 = { h: (h + 120) % 360, s, l };
+  let triadic2 = { h: (h - 120 + 360) % 360, s, l };
+  let splitComplementary1 = { h: (h + 150) % 360, s, l };
+  let splitComplementary2 = { h: (h - 150 + 360) % 360, s, l };
+  let tetradic1 = { h: (h + 60) % 360, s, l };
+  let tetradic2 = { h: (h + 180) % 360, s, l };
+  let tetradic3 = { h: (h - 60 + 360) % 360, s, l };
+
+  // Format output with % signs
+  const formatHSL = ({ h, s, l }) => `${h}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%`;
+
+  console.log('complementary:', formatHSL(complementary));
+  console.log('analogous1:', formatHSL(analogous1));
+  console.log('analogous2:', formatHSL(analogous2));
+  console.log('triadic1:', formatHSL(triadic1));
+  console.log('triadic2:', formatHSL(triadic2));
+  console.log('splitComplementary1:', formatHSL(splitComplementary1));
+  console.log('splitComplementary2:', formatHSL(splitComplementary2));
+  console.log('tetradic1:', formatHSL(tetradic1));
+  console.log('tetradic2:', formatHSL(tetradic2));
+  console.log('tetradic3:', formatHSL(tetradic3));
+
+  // Return results with % signs
+  return {
+      complementary: formatHSL(complementary),
+      analogous1: formatHSL(analogous1),
+      analogous2: formatHSL(analogous2),
+      triadic1: formatHSL(triadic1),
+      triadic2: formatHSL(triadic2),
+      splitComplementary1: formatHSL(splitComplementary1),
+      splitComplementary2: formatHSL(splitComplementary2),
+      tetradic1: formatHSL(tetradic1),
+      tetradic2: formatHSL(tetradic2),
+      tetradic3: formatHSL(tetradic3),
+  };
+}
+
+
+function setMatchingColors(baseColorHEX) {
+
+  const matchingColors = getMatchingColorsHSL(baseColorHEX);
+
+  setBackgroundColorAndText('complementary', calculateHSL(matchingColors.complementary));
+  setBackgroundColorAndText('analogous1', calculateHSL(matchingColors.analogous1));
+  setBackgroundColorAndText('analogous2', calculateHSL(matchingColors.analogous2));
+  setBackgroundColorAndText('triadic1', calculateHSL(matchingColors.triadic1));
+  setBackgroundColorAndText('triadic2', calculateHSL(matchingColors.triadic2));
+  setBackgroundColorAndText('splitComplementary1', calculateHSL(matchingColors.splitComplementary1));
+  setBackgroundColorAndText('splitComplementary2', calculateHSL(matchingColors.splitComplementary2));
+  setBackgroundColorAndText('tetradic1', calculateHSL(matchingColors.tetradic1));
+  setBackgroundColorAndText('tetradic2', calculateHSL(matchingColors.tetradic2));
+  setBackgroundColorAndText('tetradic3', calculateHSL(matchingColors.tetradic3));
 
   
+  console.log('complementary: ' + calculateHSL(matchingColors.complementary));
+  console.log('analogous1: ' + calculateHSL(matchingColors.analogous1));
+  console.log('analogous2: ' + calculateHSL(matchingColors.analogous2));
+  console.log('triadic1: ' + calculateHSL(matchingColors.triadic1));
+  console.log('triadic2: ' + calculateHSL(matchingColors.triadic2));
+  console.log('splitComplementary1: ' + calculateHSL(matchingColors.splitComplementary1));
+  console.log('splitComplementary2: ' + calculateHSL(matchingColors.splitComplementary2));
+  console.log('tetradic1: ' + calculateHSL(matchingColors.tetradic1));
+  console.log('tetradic2: ' + calculateHSL(matchingColors.tetradic2));
+  console.log('tetradic3: ' + calculateHSL(matchingColors.tetradic3));
+
 }
+
 
 function main() {
   setTitle();
   setShades();
   setValues('#' + getHashValue());
+  /* setMatchingColors(calculateHSL('#' + getHashValue())); */
 }
 
 main();
