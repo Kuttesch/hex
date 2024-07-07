@@ -212,7 +212,7 @@ function setSizeOnClick(divname) {
   }
 }
 
-function getMatchingColorsHSL(baseColorHEX) {
+/* function getMatchingColorsHSL(baseColorHEX) {
   const baseColorHSL = calculateHSL(baseColorHEX);
 
   console.log('baseColorHSL:', baseColorHSL);
@@ -276,6 +276,8 @@ function setMatchingColors(baseColorHEX) {
 
   const matchingColors = getMatchingColorsHSL(baseColorHEX);
 
+
+
   setBackgroundColorAndText('complementary', calculateHSL(matchingColors.complementary));
   setBackgroundColorAndText('analogous1', calculateHSL(matchingColors.analogous1));
   setBackgroundColorAndText('analogous2', calculateHSL(matchingColors.analogous2));
@@ -299,7 +301,7 @@ function setMatchingColors(baseColorHEX) {
   console.log('tetradic2: ' + calculateHSL(matchingColors.tetradic2));
   console.log('tetradic3: ' + calculateHSL(matchingColors.tetradic3));
 
-}
+} */
 
 
 function main() {

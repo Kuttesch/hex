@@ -125,26 +125,26 @@ body{
     text-align: center;
 }
 
-.grid-container {
+/* .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
-    grid-template-rows: 1fr repeat(3, 1fr); /* One larger row, then three equal rows */
-    gap: 1vh; /* Adjust the gap as needed */
-    height: 80%; /* Make the grid fill the viewport height */
-    width: 90%; /* Make the grid fill the viewport width */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr repeat(3, 1fr);
+    gap: 1vh;
+    height: 80%;
+    width: 90%;
   }
   
   .grid-item:first-child {
-    grid-column: 1 / span 3; /* Span the first item across all columns */
+    grid-column: 1 / span 3;
   }
   
   .grid-item {
     background-color: #c0c0c0;
-    height: 100%; /* Make the grid items fill the grid cells */
+    height: 100%;
     width: 100%;
     border-radius: 10px;
   }
-
+ */
 .shades{
     display: flex;
     justify-content: center;
