@@ -25,9 +25,18 @@
         </div>
     <div class="values" id="values">
         <div class="values-content">    
-            <div class="value hover value-hex" id="value-hex" onclick="valueOnClick('value-hex')">hex</div>
-            <div class="value hover value-rgb" id="value-rgb" onclick="valueOnClick('value-rgb')">rgb</div>
-            <div class="value hover value-hsl" id="value-hsl" onclick="valueOnClick('value-hsl')">hsl</div>
+            <div class="value value-hex" id="value-hex">
+                <div class="value-text text-hex" id="text-hex"></div>
+                <span class="copy-icon copy-hex hover material-icons" id="copy-hex"onclick="valueOnClick('value-hex', 'copy-hex')">content_copy</span>
+            </div>
+            <div class="value value-rgb" id="value-rgb">
+                <div class="value-text text-rgb" id="text-rgb"></div>
+                <span class="copy-icon copy-rgb hover material-icons" id="copy-rgb" onclick="valueOnClick('value-rgb', 'copy-rgb')">content_copy</span>
+            </div>
+            <div class="value value-hsl" id="value-hsl">
+                <div class="value-text text-hsl" id="text-hsl"></div>
+                <span class="copy-icon copy-hsl hover material-icons" id="copy-hsl" onclick="valueOnClick('value-hsl', 'copy-hsl')">content_copy</span>
+            </div>
         </div>
         <!-- <div class="suggestions">
             <div class="text">Suggestion for matching color based on color theory</div>

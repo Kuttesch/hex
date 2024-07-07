@@ -81,6 +81,19 @@ body{
     background-color: #c0c0c0;
 }
 
+.value-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.copy-icon {
+    position: relative;
+    justify-self: flex-end;
+
+}
+
 /* .suggestions {
     display: flex;
     flex-direction: column;

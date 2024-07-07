@@ -1,34 +1,31 @@
 function getHashValue() {
-    const fullUrl = window.location.href; // Get the entire URL
-    const hashIndex = fullUrl.indexOf('#'); // Find the position of "#"
-  
-    if (hashIndex !== -1) {
-      const hashValue = fullUrl.substring(hashIndex + 1); // Extract the part after "#"
-      return hashValue;
-    } else {
-      return null; // Return null if there's no hash value
-    }
+  const fullUrl = window.location.href; // Get the entire URL
+  const hashIndex = fullUrl.indexOf('#'); // Find the position of "#"
+
+  if (hashIndex !== -1) {
+    const hashValue = fullUrl.substring(hashIndex + 1); // Extract the part after "#"
+    return hashValue;
+  } else {
+    return null; // Return null if there's no hash value
   }
-  
-  const hashValue = getHashValue();
-  
-  if (hashValue) {
-    console.log("Extracted hash value:", hashValue); 
 }
 
+const hashValue = getHashValue();
+
+if (hashValue) {
+  console.log("Extracted hash value:", hashValue); 
+}
 
 function setTitle(){
-    const title = document.getElementById('shade-0');
-    const name = getHashValue();
-    title.textContent = name;
+  const title = document.getElementById('shade-0');
+  const name = getHashValue();
+  title.textContent = name;
 }
-
-
 
 function calculateShade(color, shadeCount, stepMultiplier = 0.6) {
   // Input Validation
   if (!isValidColor(color) || !Number.isInteger(shadeCount) || stepMultiplier <= 0) {
-    throw new Error("Ungültige Eingabe: Farbe muss gültiges Hex (#rrggbb) sein, shadeCount eine Ganzzahl und stepMultiplier eine positive Zahl.");
+    throw new Error("Invalid input: color must be a valid hex (#rrggbb), shadeCount must be an integer, and stepMultiplier must be a positive number.");
   }
 
   const step = Math.round((255 * stepMultiplier) / (Math.abs(shadeCount) + 1));
@@ -50,7 +47,7 @@ function lightenColor(color, amount) {
   const r = Math.min(255, (num >> 16) + amount);
   const g = Math.min(255, ((num >> 8) & 0x00FF) + amount);
   const b = Math.min(255, (num & 0x0000FF) + amount);
-  return (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
 }
 
 function darkenColor(color, amount) {
@@ -58,49 +55,48 @@ function darkenColor(color, amount) {
   const r = Math.max(0, (num >> 16) - amount);
   const g = Math.max(0, ((num >> 8) & 0x00FF) - amount);
   const b = Math.max(0, (num & 0x0000FF) - amount);
-  return (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
 }
 
-
-
-function setBackgroundColorAndText(div,color) {
-  divname = document.getElementById(div);
-  divname.style.backgroundColor = '#' + color;
-  divname.textContent = '#' + color;
-  divname.dataset.value = color;
+function setBackgroundColorAndText(div, color) {
+  const divname = document.getElementById(div);
+  divname.style.backgroundColor = color;
+  divname.textContent = color;
+  divname.dataset.value = color.slice(1); // Store the color without the '#'
 }
 
 function setShades() {
-  setBackgroundColorAndText('shade-4', calculateShade('#' + getHashValue(), -4));
-  setBackgroundColorAndText('shade-3', calculateShade('#' + getHashValue(), -3));
-  setBackgroundColorAndText('shade-2', calculateShade('#' + getHashValue(), -2));
-  setBackgroundColorAndText('shade-1', calculateShade('#' + getHashValue(), -1));
-  setBackgroundColorAndText('shade-0', getHashValue());
-  setBackgroundColorAndText('shade1', calculateShade('#' + getHashValue(), 1));
-  setBackgroundColorAndText('shade2', calculateShade('#' + getHashValue(), 2));
-  setBackgroundColorAndText('shade3', calculateShade('#' + getHashValue(), 3));
-  setBackgroundColorAndText('shade4', calculateShade('#' + getHashValue(), 4));
+  const baseColor = '#' + getHashValue();
+  setBackgroundColorAndText('shade-4', calculateShade(baseColor, -4));
+  setBackgroundColorAndText('shade-3', calculateShade(baseColor, -3));
+  setBackgroundColorAndText('shade-2', calculateShade(baseColor, -2));
+  setBackgroundColorAndText('shade-1', calculateShade(baseColor, -1));
+  setBackgroundColorAndText('shade-0', baseColor);
+  setBackgroundColorAndText('shade1', calculateShade(baseColor, 1));
+  setBackgroundColorAndText('shade2', calculateShade(baseColor, 2));
+  setBackgroundColorAndText('shade3', calculateShade(baseColor, 3));
+  setBackgroundColorAndText('shade4', calculateShade(baseColor, 4));
 }
 
 function calculateRGB(color) {
   var r = parseInt(color.substring(1, 3), 16);
   var g = parseInt(color.substring(3, 5), 16);
   var b = parseInt(color.substring(5, 7), 16);
-  return colorRBG = r.toString() + ', ' + g.toString() + ', ' + b.toString();
+  return r + ', ' + g + ', ' + b;
 }
 
 function calculateHSL(color) {
+  // Parse the RGB values from the hex color string
   var r = parseInt(color.substring(1, 3), 16) / 255;
   var g = parseInt(color.substring(3, 5), 16) / 255;
   var b = parseInt(color.substring(5, 7), 16) / 255;
 
   var max = Math.max(r, g, b);
   var min = Math.min(r, g, b);
-
   var h, s, l = (max + min) / 2;
 
-  if (max == min) {
-    h = s = 0;
+  if (max === min) {
+    h = s = 0; // Achromatic (grey)
   } else {
     var d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -120,42 +116,53 @@ function calculateHSL(color) {
     h /= 6;
   }
 
+  // Convert h, s, l to the appropriate scale
   h = Math.round(h * 360);
   s = Math.round(s * 100);
   l = Math.round(l * 100);
 
-  return h.toString() + ', ' + s.toString() + '%, ' + l.toString() + '%';
+  return h + ', ' + s + '%, ' + l + '%';
 }
 
-
 function setValues(color) {
-  valueHEX = document.getElementById('value-hex');
-  valueRGB = document.getElementById('value-rgb');
-  valueHSL = document.getElementById('value-hsl');
+  const valueHEX = document.getElementById('value-hex');
+  const textHEX = document.getElementById('text-hex');
+  const valueRGB = document.getElementById('value-rgb');
+  const textRGB = document.getElementById('text-rgb');
+  const valueHSL = document.getElementById('value-hsl');
+  const textHSL = document.getElementById('text-hsl');
 
-  valueHEX.textContent = 'HEX: #' + color;
-  valueHEX.dataset.value = '#' + color;
-  valueRGB.textContent = 'RBG(' + calculateRGB(color) + ')';
+  textHEX.textContent = 'HEX: ' + color;
+  valueHEX.dataset.value = color;
+  textRGB.textContent = 'RGB(' + calculateRGB(color) + ')';
   valueRGB.dataset.value = 'rgb(' + calculateRGB(color) + ')';
-  valueHSL.textContent = 'HSL(' + calculateHSL(color) + ')';
+  textHSL.textContent = 'HSL(' + calculateHSL(color) + ')';
   valueHSL.dataset.value = 'hsl(' + calculateHSL(color) + ')';
 }
 
 function shadesOnClick(divname) {
   const div = document.getElementById(divname);
-  setValues(div.dataset.value);
+  setValues('#' + div.dataset.value);
   console.log('onClick for ' + div.dataset.value);
 }
 
-function valueOnClick(divname) {
+function valueOnClick(divname, buttonname) {
   const div = document.getElementById(divname);
+  const button = document.getElementById(buttonname);
+
   navigator.clipboard.writeText(div.dataset.value);
+
+  const value = div.dataset.value;
+  button.style.color = value;
+  setTimeout(() => {
+    button.style.color = "";
+  }, 1000);
 }
 
 function main() {
   setTitle();
   setShades();
-  setValues(getHashValue());
+  setValues('#' + getHashValue());
 }
 
 main();
