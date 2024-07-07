@@ -1,41 +1,40 @@
-const randomHexColorCode = () => {
-    let n = (Math.random() * 0xfffff * 1000000).toString(16);
-    return '#' + n.slice(0, 6);
-  };
-
-
-  const randomUniqueHexColorCode = () => {
-    const existingColors = new Set(); // Store generated colors
-  
-    while (true) {
-      let n = Math.floor(Math.random() * 0xffffff).toString(16); // Generate hex number
-      let color = '#' + n.padStart(6, '0'); // Pad with zeros and add #
-  
-      if (!existingColors.has(color)) {
-        existingColors.add(color); 
-        return color; 
-      }
-    }
-  };
-  
-
-const gridContainer = document.querySelector('.grid-container');
-
+//  ### Define Variables ### //
 
 const numDivs = 2000;
 
+//  ### Function to generate random unique hex color code ### //
 
-function createAndAppendDiv(container, index) {
+  const randomUniqueHexColorCode = () => {
+    const existingColors = new Set();
+  
+    while (true) {
+      let n = Math.floor(Math.random() * 0xffffff).toString(16);
+      let color = '#' + n.padStart(6, '0');
+  
+      if (!existingColors.has(color)) {
+        existingColors.add(color);
+        return color; 
+      }
+      else {
+        console.log('Duplicate color found: ' + color);
+      }
+    }
+    
+  };
+  
+//  ### Function to create and append divs ### //
+
+function createAndAppendDiv() {
+  const container = document.querySelector('.grid-container');
   const newDiv = document.createElement('div');
-  newDiv.classList.add('grid-item');
-
+    newDiv.classList.add('grid-item');
   let color = randomUniqueHexColorCode();
+
 
 
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
   newDiv.onclick = function() {
-    /* window.location.href = `https://kuttesch.github.io/hex/sub${this.dataset.value}`; */
     let url = window.location.href;
      if (url.includes('index.html')) {
       url = url.replace('index.html', `sub${this.dataset.value}`);
@@ -50,8 +49,26 @@ function createAndAppendDiv(container, index) {
   container.appendChild(newDiv);
 }
 
-// Generate the divs
-for (let i = 0; i < numDivs; i++) {
-  createAndAppendDiv(gridContainer, i);
+//  ### Main function ### //
+
+function main() {
+  for (let i = 0; i < numDivs; i++) {
+    createAndAppendDiv();
+  }
 }
 
+//  ### Run main function ### //
+
+window.onload = main;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const viewportHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  if (scrollY + viewportHeight >= documentHeight - 100) {
+    for (let i = 0; i < numDivs; i++) {
+      createAndAppendDiv();
+    }
+  }
+});
