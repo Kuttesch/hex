@@ -153,6 +153,8 @@ function shadesOnClick(divname) {
   const div = document.getElementById(divname);
   setValues('#' + div.dataset.value);
   console.log('onClick for ' + div.dataset.value);
+
+  setSizeOnClick(divname);
 }
 
 function valueOnClick(divname, buttonname) {
@@ -180,6 +182,33 @@ function calculateFontColor(color) {
 function setFontColor(divname, color) {
   const div = document.getElementById(divname);
   div.style.color = calculateFontColor(color);
+}
+
+function setSizeOnClick(divname) {
+  const focus = document.getElementById(divname);
+  focus.position = focus.dataset.position;
+
+  console.log('focus: ' + focus.position);
+
+  for (let i = 1; i < 10; i++) {
+    const div = document.getElementsByClassName('shade--' + i)[0];
+    div.position = div.dataset.position;
+    div.style.width = 45 - Math.abs(div.position - focus.position) + 'vw';
+
+    if (Math.abs(focus.position - div.position) !== 0) {
+      div.style.height = '9vh';
+      console.log('height: ' + div.style.height);
+    } else {
+      div.style.height = '10vh';
+      console.log('height: ' + div.style.height);
+    }
+
+    console.log('position: ' + div.position);
+    console.log(Math.abs(div.position - focus.position));
+    console.log('width: ' + div.style.width);
+  }
+
+  
 }
 
 function main() {
