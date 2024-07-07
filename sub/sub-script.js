@@ -68,14 +68,23 @@ function setBackgroundColorAndText(div, color) {
 function setShades() {
   const baseColor = '#' + getHashValue();
   setBackgroundColorAndText('shade-4', calculateShade(baseColor, -4));
+  setFontColor('shade-4', calculateShade(baseColor, -4));
   setBackgroundColorAndText('shade-3', calculateShade(baseColor, -3));
+  setFontColor('shade-3', calculateShade(baseColor, -3));
   setBackgroundColorAndText('shade-2', calculateShade(baseColor, -2));
+  setFontColor('shade-2', calculateShade(baseColor, -2));
   setBackgroundColorAndText('shade-1', calculateShade(baseColor, -1));
+  setFontColor('shade-1', calculateShade(baseColor, -1));
   setBackgroundColorAndText('shade-0', baseColor);
+  setFontColor('shade-0', baseColor);
   setBackgroundColorAndText('shade1', calculateShade(baseColor, 1));
+  setFontColor('shade1', calculateShade(baseColor, 1));
   setBackgroundColorAndText('shade2', calculateShade(baseColor, 2));
+  setFontColor('shade2', calculateShade(baseColor, 2));
   setBackgroundColorAndText('shade3', calculateShade(baseColor, 3));
+  setFontColor('shade3', calculateShade(baseColor, 3));
   setBackgroundColorAndText('shade4', calculateShade(baseColor, 4));
+  setFontColor('shade4', calculateShade(baseColor, 4));
 }
 
 function calculateRGB(color) {
@@ -144,6 +153,8 @@ function shadesOnClick(divname) {
   const div = document.getElementById(divname);
   setValues('#' + div.dataset.value);
   console.log('onClick for ' + div.dataset.value);
+
+  setSizeOnClick(divname);
 }
 
 function valueOnClick(divname, buttonname) {
@@ -157,6 +168,47 @@ function valueOnClick(divname, buttonname) {
   setTimeout(() => {
     button.style.color = "";
   }, 1000);
+}
+
+function calculateFontColor(color) {
+  const r = parseInt(color.substring(1, 3), 16);
+  const g = parseInt(color.substring(3, 5), 16);
+  const b = parseInt(color.substring(5, 7), 16);
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+
+  return brightness >= 128 ? '#000000' : '#ffffff';
+}
+
+function setFontColor(divname, color) {
+  const div = document.getElementById(divname);
+  div.style.color = calculateFontColor(color);
+}
+
+function setSizeOnClick(divname) {
+  const focus = document.getElementById(divname);
+  focus.position = focus.dataset.position;
+
+  console.log('focus: ' + focus.position);
+
+  for (let i = 1; i < 10; i++) {
+    const div = document.getElementsByClassName('shade--' + i)[0];
+    div.position = div.dataset.position;
+    div.style.width = 45 - Math.abs(div.position - focus.position) + 'vw';
+
+    if (Math.abs(focus.position - div.position) !== 0) {
+      div.style.height = '9vh';
+      console.log('height: ' + div.style.height);
+    } else {
+      div.style.height = '10vh';
+      console.log('height: ' + div.style.height);
+    }
+
+    console.log('position: ' + div.position);
+    console.log(Math.abs(div.position - focus.position));
+    console.log('width: ' + div.style.width);
+  }
+
+  
 }
 
 function main() {
