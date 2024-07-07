@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="51" y="1" width="48" height="48" rx="10" fill="#D31B97"/>
+<rect x="101" y="1" width="48" height="48" rx="10" fill="#12CC19"/>
+<rect x="1" y="51" width="48" height="48" rx="10" fill="#A51A1F"/>
+<rect x="51" y="51" width="48" height="48" rx="10" fill="#FF007A"/>
+<rect x="101" y="51" width="48" height="48" rx="10" fill="#00398F"/>
+<rect x="151" y="51" width="48" height="48" rx="10" fill="#F94BD3"/>
+<rect x="1" y="101" width="48" height="48" rx="10" fill="#FFC700"/>
+<rect x="51" y="101" width="48" height="48" rx="10" fill="#0038FF"/>
+<rect x="101" y="101" width="48" height="48" rx="10" fill="#FF7A00"/>
+<rect x="151" y="101" width="48" height="48" rx="10" fill="#FF0000"/>
+<rect x="51" y="151" width="48" height="48" rx="10" fill="#9F102A"/>
+<rect x="101" y="151" width="48" height="48" rx="10" fill="#00E0FF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M198.412 157.614C195.141 178.579 178.579 195.141 157.614 198.412C153.757 197.024 151 193.334 151 189V161C151 155.477 155.477 151 161 151H189C193.334 151 197.024 153.757 198.412 157.614Z" fill="#FFE600"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 34.0983C5.69082 18.2145 18.2145 5.69082 34.0983 1L39 1C44.5229 1 49 5.47715 49 11V39C49 44.5229 44.5228 49 39 49H11C5.47715 49 1 44.5228 1 39L1 34.0983Z" fill="#0900EC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M41.7789 198.609C22.3226 196.144 6.42431 182.269 1 163.902L1 161C1 155.477 5.47715 151 11 151H39C44.5229 151 49 155.477 49 161V189C49 193.559 45.9497 197.405 41.7789 198.609Z" fill="#00FF38"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M163.902 1C182.269 6.42431 196.144 22.3226 198.609 41.7789C197.405 45.9497 193.559 49 189 49H161C155.477 49 151 44.5228 151 39V11C151 5.47715 155.477 1 161 1H163.902Z" fill="#ECF127"/>
+</svg>
