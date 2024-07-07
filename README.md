@@ -16,7 +16,7 @@ HEX! is a web based color for designers to find the perfect color for their proj
 
 ## Usage
 
-Just visit HEX! at [https://www.kuttesch.github.io/hex/](https://www.kuttesch.github.io/hex/) and start finding the perfect color for your project.
+Just visit HEX! at [kuttesch.github.io/hex/](https://kuttesch.github.io/hex/) and start finding the perfect color for your project.
 
 
 
