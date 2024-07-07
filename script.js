@@ -35,9 +35,7 @@ function createAndAppendDiv(container, index) {
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
   newDiv.onclick = function() {
-    var url = new URL('/hex/sub', window.location.href);
-    url.hash = this.dataset.value;
-    window.location.href = url.toString();
+    window.location.href = `https://kuttesch.github.io/hex/sub${this.dataset.value}`;
   };
 
 
