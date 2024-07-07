@@ -4,32 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="sub-styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>HEX</title>
 </head>
 <body>
-    <!-- <div class="back">
-        <a href="../index.html"></a>
-    </div> -->
+    <div class="back">
+        <a href="../index.html"><div class="home material-icons">home</div></a>
+    </div>
     <div class="content">
         <div class="colors" id="colors">
-            <div class="shades shade-4" id="shade-4"></div>
-            <div class="shades shade-3" id="shade-3"></div>
-            <div class="shades shade-2" id="shade-2"></div>
-            <div class="shades shade-1" id="shade-1"></div>
-            <div class="shades shade-0" id="shade-0"></div>
-            <div class="shades shade1" id="shade1"></div>
-            <div class="shades shade2" id="shade2"></div>
-            <div class="shades shade3" id="shade3"></div>
-            <div class="shades shade4" id="shade4"></div>
+            <div class="shades hover shade-4" id="shade-4" onclick="shadesOnClick('shade-4')"></div>
+            <div class="shades hover shade-3" id="shade-3" onclick="shadesOnClick('shade-3')"></div>
+            <div class="shades hover shade-2" id="shade-2" onclick="shadesOnClick('shade-2')"></div>
+            <div class="shades hover shade-1" id="shade-1" onclick="shadesOnClick('shade-1')"></div>
+            <div class="shades hover shade-0" id="shade-0" onclick="shadesOnClick('shade-0')"></div>
+            <div class="shades hover shade1" id="shade1" onclick="shadesOnClick('shade1')"></div>
+            <div class="shades hover shade2" id="shade2" onclick="shadesOnClick('shade2')"></div>
+            <div class="shades hover shade3" id="shade3" onclick="shadesOnClick('shade3')"></div>
+            <div class="shades hover shade4" id="shade4" onclick="shadesOnClick('shade4')"></div>
         </div>
     <div class="values" id="values">
-        <div class="text">To copy the shade in the desired format, just click on it</div>
         <div class="values-content">    
-            <div class="value value-hex" id="value-hex">hex</div>
-            <div class="value value-rgb" id="value-rgb">rgb</div>
-            <div class="value value-hsl" id="value-hsl">hsl</div>
-            <div class="value calue hwb" id="value-hwb">hwb</div>
+            <div class="value hover value-hex" id="value-hex" onclick="valueOnClick('value-hex')">hex</div>
+            <div class="value hover value-rgb" id="value-rgb" onclick="valueOnClick('value-rgb')">rgb</div>
+            <div class="value hover value-hsl" id="value-hsl" onclick="valueOnClick('value-hsl')">hsl</div>
         </div>
+        <!-- <div class="suggestions">
+            <div class="text">Suggestion for matching color based on color theory</div>
+            <div class="suggestion-1 hover" id="suggestion-1"></div>
+            <div class="grid-container">
+                <div class="grid-item hover suggestion-2" id="suggestion-2"></div>
+                <div class="grid-item hover suggestion-3" id="suggestion-3"></div>
+                <div class="grid-item hover suggestion-4" id="suggestion-4"></div>
+                <div class="grid-item hover suggestion-5" id="suggestion-5"></div>
+                <div class="grid-item hover suggestion-6" id="suggestion-6"></div>
+                <div class="grid-item hover suggestion-7" id="suggestion-7"></div>
+                <div class="grid-item hover suggestion-8" id="suggestion-8"></div>
+                <div class="grid-item hover suggestion-9" id="suggestion-9"></div>
+                <div class="grid-item hover suggestion-10" id="suggestion-10"></div>
+            </div>
+        </div> -->
     </div>    
 
     <script src="sub-script.js"></script>

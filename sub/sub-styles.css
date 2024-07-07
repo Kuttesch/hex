@@ -30,6 +30,20 @@ body{
 /*     background-color: aqua;
  */}
 
+.home{
+    position: absolute;
+    top: 1vh;
+    left: 1vw;
+    font-weight: bold;
+    color: #000000;
+    transition: all 0.3s ease;
+    font-size: 2em;
+}
+
+.home:hover{
+    transform: scale(1.2);
+}
+
 .values{
     display: flex;
     flex-direction: column;
@@ -41,20 +55,6 @@ body{
 /*     background-color: #e60000;
  */}
 
- .text {
-    align-self: flex-start;
-    justify-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #000000;
-    height: 30vh;
-    width: 49vw;
-    font-size: 1.5em;
-    font-weight: bold;
-    z-index: 1;
- }
 
 .values-content{
     display: flex;
@@ -62,7 +62,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 49vw;
-    height: 70vh;
+    height: 50vh;
 } 
 
 .value{
@@ -81,17 +81,76 @@ body{
     background-color: #c0c0c0;
 }
 
+/* .suggestions {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 49vw;
+    height: 50vh;
+
+    border-radius: 20px;
+    border: 2px solid #000000;
+
+
+}
+
+.text{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #000000;
+    height: 5vh;
+    width: 49vw;
+    margin-bottom: 1vh;
+    text-align: center;
+}
+
+.suggestion-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    height: 9vh;
+    margin-top: 1vh;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f0f0f0;
+    background-color: #c0c0c0;
+
+}
+
+.grid-container {
+    height: auto;
+    width: 45vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    background-color: aqua;
+}
+
+.grid-item {
+    width: 15vh;
+    height: 10vh;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease;
+    background-color: brown;
+} */
+
 .shades{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 0.5vh;
     border-radius: 10px;
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: bold;
     text-transform: uppercase;
     color: #f0f0f0;
-    transition: all 0.3s ease;
     background-color: aliceblue;
 }
 
@@ -120,6 +179,11 @@ body{
     height: 9vh;
 }
 
-.shades:hover{
+.hover {
+    transition: all 0.3s ease;
+
+}
+
+.hover:hover{
     transform: scale(1.05);
 }

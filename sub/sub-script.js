@@ -67,28 +67,95 @@ function setBackgroundColorAndText(div,color) {
   divname = document.getElementById(div);
   divname.style.backgroundColor = '#' + color;
   divname.textContent = '#' + color;
+  divname.dataset.value = color;
 }
 
-function setShades(){
-  setBackgroundColorAndText('shade-4', calculateShade('#db16ed', -4));
-  setBackgroundColorAndText('shade-3', calculateShade('#db16ed', -3));
-  setBackgroundColorAndText('shade-2', calculateShade('#db16ed', -2));
-  setBackgroundColorAndText('shade-1', calculateShade('#db16ed', -1));
+function setShades() {
+  setBackgroundColorAndText('shade-4', calculateShade('#' + getHashValue(), -4));
+  setBackgroundColorAndText('shade-3', calculateShade('#' + getHashValue(), -3));
+  setBackgroundColorAndText('shade-2', calculateShade('#' + getHashValue(), -2));
+  setBackgroundColorAndText('shade-1', calculateShade('#' + getHashValue(), -1));
   setBackgroundColorAndText('shade-0', getHashValue());
-  setBackgroundColorAndText('shade1', calculateShade('#db16ed', 1));
-  setBackgroundColorAndText('shade2', calculateShade('#db16ed', 2));
-  setBackgroundColorAndText('shade3', calculateShade('#db16ed', 3));
-  setBackgroundColorAndText('shade4', calculateShade('#db16ed', 4));
+  setBackgroundColorAndText('shade1', calculateShade('#' + getHashValue(), 1));
+  setBackgroundColorAndText('shade2', calculateShade('#' + getHashValue(), 2));
+  setBackgroundColorAndText('shade3', calculateShade('#' + getHashValue(), 3));
+  setBackgroundColorAndText('shade4', calculateShade('#' + getHashValue(), 4));
 }
 
-function setValues(){
-  
+function calculateRGB(color) {
+  var r = parseInt(color.substring(1, 3), 16);
+  var g = parseInt(color.substring(3, 5), 16);
+  var b = parseInt(color.substring(5, 7), 16);
+  return colorRBG = r.toString() + ', ' + g.toString() + ', ' + b.toString();
+}
+
+function calculateHSL(color) {
+  var r = parseInt(color.substring(1, 3), 16) / 255;
+  var g = parseInt(color.substring(3, 5), 16) / 255;
+  var b = parseInt(color.substring(5, 7), 16) / 255;
+
+  var max = Math.max(r, g, b);
+  var min = Math.min(r, g, b);
+
+  var h, s, l = (max + min) / 2;
+
+  if (max == min) {
+    h = s = 0;
+  } else {
+    var d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+
+    h /= 6;
+  }
+
+  h = Math.round(h * 360);
+  s = Math.round(s * 100);
+  l = Math.round(l * 100);
+
+  return h.toString() + ', ' + s.toString() + '%, ' + l.toString() + '%';
+}
+
+
+function setValues(color) {
+  valueHEX = document.getElementById('value-hex');
+  valueRGB = document.getElementById('value-rgb');
+  valueHSL = document.getElementById('value-hsl');
+
+  valueHEX.textContent = 'HEX: #' + color;
+  valueHEX.dataset.value = '#' + color;
+  valueRGB.textContent = 'RBG(' + calculateRGB(color) + ')';
+  valueRGB.dataset.value = 'rgb(' + calculateRGB(color) + ')';
+  valueHSL.textContent = 'HSL(' + calculateHSL(color) + ')';
+  valueHSL.dataset.value = 'hsl(' + calculateHSL(color) + ')';
+}
+
+function shadesOnClick(divname) {
+  const div = document.getElementById(divname);
+  setValues(div.dataset.value);
+  console.log('onClick for ' + div.dataset.value);
+}
+
+function valueOnClick(divname) {
+  const div = document.getElementById(divname);
+  navigator.clipboard.writeText(div.dataset.value);
 }
 
 function main() {
   setTitle();
   setShades();
-
+  setValues(getHashValue());
 }
 
 main();
