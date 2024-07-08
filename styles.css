@@ -82,13 +82,15 @@ h1 {
     transform: scale(1.2);
 }
 
-/* .spacer {
-    height: 10vh;
-/*     scroll-snap-align: start;
-}  */
-
 .grid-container {
-    margin-top: 10vh;
+    scroll-snap-align: start;
+}
+
+.spacer {
+    height: 10vh;
+} 
+
+.color-grid {
     height: auto;
     width: 99vw;
     display: grid;
@@ -97,7 +99,7 @@ h1 {
     gap: 0.5vh;
     justify-content: center;
 
-    scroll-snap-align: start;
+    
 
 }
 

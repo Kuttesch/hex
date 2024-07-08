@@ -25,7 +25,7 @@ const numDivs = 2000;
 //  ### Function to create and append divs ### //
 
 function createAndAppendDiv() {
-  const container = document.querySelector('.grid-container');
+  const container = document.querySelector('.color-grid');
   const newDiv = document.createElement('div');
     newDiv.classList.add('grid-item');
   let color = randomUniqueHexColorCode();
