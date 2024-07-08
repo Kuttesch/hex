@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="sub-styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="icon" href="../src/favicon.svg">
     <title>HEX!</title>
 </head>
@@ -12,7 +13,11 @@
     <div class="back">
         <a href="../index.html"><div class="home material-icons">home</div></a>
     </div>
-    <div class="content">
+    <div class="reload-container">
+        <i class="reload material-symbols-outlined" onclick="reloadSubSite()">sync</i>
+    </div>
+    
+    <div class="main" id="main">
         <div class="colors" id="colors">
             <div class="shades hover shade-4 shade--1" id="shade-4" data-position="1" onclick="shadesOnClick('shade-4')"></div>
             <div class="shades hover shade-3 shade--2" id="shade-3" data-position="2" onclick="shadesOnClick('shade-3')"></div>
@@ -24,21 +29,21 @@
             <div class="shades hover shade3  shade--8" id="shade3"  data-position="8" onclick="shadesOnClick('shade3')"></div>
             <div class="shades hover shade4  shade--9" id="shade4"  data-position="9" onclick="shadesOnClick('shade4')"></div>
         </div>
-    <div class="values" id="values">
-        <div class="values-content">    
-            <div class="value value-hex" id="value-hex">
-                <div class="value-text text-hex" id="text-hex"></div>
-                <span class="copy-icon copy-hex hover material-icons" id="copy-hex"onclick="valueOnClick('value-hex', 'copy-hex')">content_copy</span>
+        <div class="values" id="values">
+            <div class="values-content">    
+                <div class="value value-hex" id="value-hex">
+                    <div class="value-text text-hex" id="text-hex"></div>
+                    <span class="copy-icon copy-hex hover material-icons" id="copy-hex"onclick="valueOnClick('value-hex', 'copy-hex')">content_copy</span>
+                </div>
+                <div class="value value-rgb" id="value-rgb">
+                    <div class="value-text text-rgb" id="text-rgb"></div>
+                    <span class="copy-icon copy-rgb hover material-icons" id="copy-rgb" onclick="valueOnClick('value-rgb', 'copy-rgb')">content_copy</span>
+                </div>
+                <div class="value value-hsl" id="value-hsl">
+                    <div class="value-text text-hsl" id="text-hsl"></div>
+                    <span class="copy-icon copy-hsl hover material-icons" id="copy-hsl" onclick="valueOnClick('value-hsl', 'copy-hsl')">content_copy</span>
+                </div>
             </div>
-            <div class="value value-rgb" id="value-rgb">
-                <div class="value-text text-rgb" id="text-rgb"></div>
-                <span class="copy-icon copy-rgb hover material-icons" id="copy-rgb" onclick="valueOnClick('value-rgb', 'copy-rgb')">content_copy</span>
-            </div>
-            <div class="value value-hsl" id="value-hsl">
-                <div class="value-text text-hsl" id="text-hsl"></div>
-                <span class="copy-icon copy-hsl hover material-icons" id="copy-hsl" onclick="valueOnClick('value-hsl', 'copy-hsl')">content_copy</span>
-            </div>
-        </div>
         <!-- <div class="suggestions">
             <div class="text">Suggestion for matching color based on color theory</div>
             

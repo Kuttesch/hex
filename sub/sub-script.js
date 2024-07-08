@@ -1,5 +1,13 @@
-// import { randomUniqueHexColorCode, createAndAppendDiv } from '../script.js';
+/*  import { randomHexColorCode } from '../script.js'; */
 
+const randomHexCodeColor = () => {
+
+  let n = Math.floor(Math.random() * 0xffffff).toString(16);
+  let color = '#' + n.padStart(6, '0');
+  return color;
+}
+ 
+const hashValue = getHashValue();
 
 function getHashValue() {
   const fullUrl = window.location.href; // Get the entire URL
@@ -12,8 +20,6 @@ function getHashValue() {
     return null; // Return null if there's no hash value
   }
 }
-
-const hashValue = getHashValue();
 
 if (hashValue) {
   console.log("Extracted hash value:", hashValue); 
@@ -212,6 +218,35 @@ function setSizeOnClick(divname) {
   }
 }
 
+// 
+
+function reloadSubSite() {
+  const url = window.location.href;
+  const baseUrl = url.split('#')[0];
+  const newUrl = baseUrl + randomHexCodeColor();
+  console.log('url:', newUrl);
+  window.location.href = newUrl;
+
+  main();
+}
+
+
+
+
+function main() {
+  setTitle();
+  setShades();
+  setValues('#' + getHashValue());
+  setSizeOnClick('shade-0');
+  /* setMatchingColors(calculateHSL('#' + getHashValue())); */
+}
+
+window.onload = main;
+
+
+
+
+
 /* function getMatchingColorsHSL(baseColorHEX) {
   const baseColorHSL = calculateHSL(baseColorHEX);
 
@@ -302,13 +337,3 @@ function setMatchingColors(baseColorHEX) {
   console.log('tetradic3: ' + calculateHSL(matchingColors.tetradic3));
 
 } */
-
-
-function main() {
-  setTitle();
-  setShades();
-  setValues('#' + getHashValue());
-  /* setMatchingColors(calculateHSL('#' + getHashValue())); */
-}
-
-main();

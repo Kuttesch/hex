@@ -1,8 +1,12 @@
+* {
+    transition: all 0.1s ease;
+}
+
 body{
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     height: 100vh;
     width: 100vw;
@@ -10,13 +14,34 @@ body{
     user-select: none;
 }
 
-.content{
+.reload-container {
+    z-index: 2;
+    position: fixed;
+    top: 1vh;
+    right: 1vw;
+    font-weight: bold;
+    color: #000000;
+    transition: all 0.3s ease;
+}
+
+.reload {
+    font-size: 2em !important;
+    transition: all 0.1s ease;
+}
+
+.reload:hover {
+    transform: scale(1.2);
+}
+
+
+.main{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: start;
-    width: 100%;
+    width: 100vw;
     height: 100%;
+    /* background-color: aqua; */
 }
 
 .colors {
@@ -31,7 +56,7 @@ body{
  */}
 
 .home{
-    position: absolute;
+    position: fixed;
     top: 1vh;
     left: 1vw;
     font-weight: bold;
