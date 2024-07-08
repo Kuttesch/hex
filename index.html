@@ -10,11 +10,19 @@
 </head>
 <body>
     <div class="content">
-        <div class="header">
-            <h1>HEX!</h1>
-            <p>Find colors for your next Project!</p>
-        </div> 
+        <div class="landing">
+            <div class="header">
+                <h1 id="title">HEX!</h1>
+                <p>Find colors for your next Project!</p>
+            </div>
+            <div class="scrollDownContainer">
+                <i class="scrollDown material-icons" onclick="window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })">keyboard_arrow_down</i>
+            </div>
+        </div>
+        <div class="spacer"></div>
         <div class="grid-container"></div>
+        <div class="scrollDown">
+        </div>
     </div>    
 
     <script src="script.js"></script>

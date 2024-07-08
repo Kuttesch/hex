@@ -49,12 +49,20 @@ function createAndAppendDiv() {
   container.appendChild(newDiv);
 }
 
+//
+
+function titleColor() {
+  const title = document.getElementById('title');
+  title.style.color = randomUniqueHexColorCode();
+}
+
 //  ### Main function ### //
 
 function main() {
   for (let i = 0; i < numDivs; i++) {
     createAndAppendDiv();
   }
+  titleColor();
 }
 
 //  ### Run main function ### //
