@@ -8,8 +8,7 @@ const numDivs = 2000;
     const existingColors = new Set();
   
     while (true) {
-      let n = Math.floor(Math.random() * 0xffffff).toString(16);
-      let color = '#' + n.padStart(6, '0');
+      let color = randomHexCodeColor();
   
       if (!existingColors.has(color)) {
         existingColors.add(color);
@@ -17,10 +16,18 @@ const numDivs = 2000;
       }
       else {
         console.log('Duplicate color found: ' + color);
+        randomUniqueHexColorCode();
       }
     }
     
   };
+
+const randomHexCodeColor = () => {
+
+  let n = Math.floor(Math.random() * 0xffffff).toString(16);
+  let color = '#' + n.padStart(6, '0');
+  return color;
+}
   
 //  ### Function to create and append divs ### //
 
@@ -49,12 +56,25 @@ function createAndAppendDiv() {
   container.appendChild(newDiv);
 }
 
-//
+//  ### Function to change title color ### //
 
 function titleColor() {
   const title = document.getElementById('title');
   title.style.color = randomUniqueHexColorCode();
 }
+
+//
+
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const main = document.getElementById('main');
+  const colorGrid = document.getElementById('color-grid');
+
+  sidebar.classList.toggle('expanded');
+  main.classList.toggle('expanded');
+  colorGrid.classList.toggle('expanded');
+}
+
 
 //  ### Main function ### //
 
