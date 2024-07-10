@@ -156,8 +156,9 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-size), var(--grid-item-size)));
     grid-auto-rows: var(--grid-item-size);
-    gap: 0.5vh;
+    gap: 0.5vw;
     justify-content: center;
+    transition: all 0.5s ease;
 }
 
 .color-grid.expanded {
@@ -172,7 +173,22 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.1s ease;
+    transition: all 0.5s ease;
+}
+
+.grid-item.selected {
+    /* grid-column: 3 / 7; */
+    grid-column: span 4;
+    grid-row: span 4;
+    width: calc(var(--grid-item-size) * 4 );
+    height: calc(var(--grid-item-size) * 4 );
+    border-radius: 2%;
+    transition: all 0.5s ease;
+    background-color: #f0f0f0;
+}
+
+.grid-item.selected:hover {
+    transform: none;
 }
 
 .grid-item:hover {
