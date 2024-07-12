@@ -108,7 +108,7 @@ function clickColorCard() {
     console.log('BorderColor:' + selectedDiv.style.borderColor);
     selectedDiv.style.marginLeft = '0.25vh';
     selectedDiv.style.marginTop = '0.25vh';
-    setGridPosition2(this.id);
+    setGridPosition(this.id);
 
   }
   else if (selectionStatus === true){
@@ -120,13 +120,12 @@ function clickColorCard() {
     console.log('BorderColor:' + selectedDiv.style.borderColor);
     selectedDiv.style.marginLeft = '0';
     selectedDiv.style.marginTop = '0';
-    selectedDiv.style.gridColumn = 'auto';
     resetGridPosition(this.id);
   }
 
 }
 
-function setGridPosition2(div) {
+function setGridPosition(div) {
   const gridContainer = document.getElementById('color-grid');
   const Viewport = window.innerWidth;
   const gridItem = document.getElementById(div);
@@ -153,16 +152,15 @@ function setGridPosition2(div) {
     ItemPosition = ItemNumber % RowLenght;
     console.log('ItemPosition:' + ItemPosition);
   }
-  if (ItemPosition < RowLenght - 4) {
-    gridItem.style.gridColumn = ItemPosition + '/' + (ItemPosition + 4);
-    console.log('gridColumn:' + gridItem.style.gridColumn);
-    } else {
-      gridItem.style.gridColumn = (ItemPosition - 4) + '/' + ItemPosition;
-      console.log('gridColumn:' + gridItem.style.gridColumn);
-      const start = document.getElementById('grid-item-' + (ItemPosition - 4));
-      console.log(ItemPosition - 3);
+  if (ItemPosition > RowLenght - 3) {
+      const start = document.getElementById('grid-item-' + (RowLenght - 3));
       gridContainer.insertBefore(gridItem, start);
-      console.log('moved before' + start);
+      console.log('moved' + gridItem + 'before' + start);
+      
+      gridItem.style.gridColumn = 'span 4';
+      gridItem.style.width = 'calc(var(--grid-item-size) * 4)';
+      gridItem.style.height = 'calc(var(--grid-item-size) * 4)';
+
     }
 }
 
@@ -172,6 +170,10 @@ function resetGridPosition(div) {
   const divNumber = gridItem.dataset.number;
   const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
   gridContainer.insertBefore(gridItem, followingDiv);
+
+  gridItem.style.gridColumn = 'span 1';
+  gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
+  gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
 }  
 
 //  ### Main function ### //

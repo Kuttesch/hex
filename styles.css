@@ -178,10 +178,7 @@ h1 {
 
 .grid-item.selected {
     /* grid-column: 3 / 7; */
-    /* grid-column: span 4; */
     grid-row: span 4;
-    width: calc(var(--grid-item-size) * 4 );
-    height: calc(var(--grid-item-size) * 4 );
     border-radius: 2%;
     transition: all 0.5s ease;
     background-color: #f0f0f0;
