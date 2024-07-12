@@ -50,7 +50,7 @@ function createAndAppendDiv() {
     newDiv.onclick = clickColorCard;
   let color = randomUniqueHexColorCode();
 
-
+    newDiv.innerHTML = `${number}`;
 
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
@@ -108,7 +108,7 @@ function clickColorCard() {
     console.log('BorderColor:' + selectedDiv.style.borderColor);
     selectedDiv.style.marginLeft = '0.25vh';
     selectedDiv.style.marginTop = '0.25vh';
-    setGridPosition(this.id);
+    setGridPosition2(this.id);
 
   }
   else if (selectionStatus === true){
@@ -121,12 +121,12 @@ function clickColorCard() {
     selectedDiv.style.marginLeft = '0';
     selectedDiv.style.marginTop = '0';
     selectedDiv.style.gridColumn = 'auto';
-    
+    resetGridPosition(this.id);
   }
 
 }
 
-function setGridPosition(div) {
+function setGridPosition2(div) {
   const gridContainer = document.getElementById('color-grid');
   const Viewport = window.innerWidth;
   const gridItem = document.getElementById(div);
@@ -153,17 +153,26 @@ function setGridPosition(div) {
     ItemPosition = ItemNumber % RowLenght;
     console.log('ItemPosition:' + ItemPosition);
   }
-
-  if (ItemPosition < RowLenght - 3) {
+  if (ItemPosition < RowLenght - 4) {
     gridItem.style.gridColumn = ItemPosition + '/' + (ItemPosition + 4);
     console.log('gridColumn:' + gridItem.style.gridColumn);
     } else {
       gridItem.style.gridColumn = (ItemPosition - 4) + '/' + ItemPosition;
       console.log('gridColumn:' + gridItem.style.gridColumn);
+      const start = document.getElementById('grid-item-' + (ItemPosition - 4));
+      console.log(ItemPosition - 3);
+      gridContainer.insertBefore(gridItem, start);
+      console.log('moved before' + start);
     }
-  
-
 }
+
+function resetGridPosition(div) {
+  const gridContainer = document.getElementById('color-grid');
+  const gridItem = document.getElementById(div);
+  const divNumber = gridItem.dataset.number;
+  const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
+  gridContainer.insertBefore(gridItem, followingDiv);
+}  
 
 //  ### Main function ### //
 
