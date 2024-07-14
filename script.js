@@ -88,7 +88,7 @@ async function clickColorCard() {
     deselectItem(selectedDivId);
   } else {
     deselectItem(selectionStatus);
-    /* await new Promise(r => setTimeout(r, 500)); */
+    await new Promise(r => setTimeout(r, 500));
     selectItem(selectedDiv);
   }
 }
