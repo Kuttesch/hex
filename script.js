@@ -54,18 +54,6 @@ function createAndAppendDiv() {
 
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
- /*  newDiv.onclick = function() {
-    let url = window.location.href;
-     if (url.includes('index.html')) {
-      url = url.replace('index.html', `sub${this.dataset.value}`);
-    } else {
-      url = url + `sub${this.dataset.value}`;
-    }
-    console.log(url);
-    window.location.href = url;
-    }; */
-
-
   container.appendChild(newDiv);
   
 }
@@ -126,99 +114,49 @@ function deselectItem(selectionStat) {
   resetGridPosition(selectedDiv.id);
 }
 
-function setGridPosition(div) {
-  const gridContainer = document.getElementById('color-grid');
-  const Viewport = window.innerWidth;
-  const gridItem = document.getElementById(div);
-  const gap = 0.005 * Viewport;
-  const gridItemSize = 0.05 * Viewport;
 
-  const ItemExpanded = gridItemSize * 6 + gap * 4;
-
-  const ContainerWidth = gridContainer.offsetWidth;
-  const ItemWidth = gridItem.offsetWidth + gap;
-  const ItemNumber = gridItem.dataset.number;
-  const RowLenght = Math.round(ContainerWidth / ItemWidth);
-  let ItemPositionRow = 0;
-  let ItemPositionColumn = Math.round(ItemNumber / RowLenght);
-
-  if (ItemNumber % RowLenght === 0) {
-    ItemPositionRow = RowLenght;
-  } else {
-    ItemPositionRow = ItemNumber % RowLenght;
-  }
-  if (ItemPositionRow > RowLenght - 5) {
-      const start = document.getElementById('grid-item-' + (ItemPositionRow - 5));
-      gridContainer.insertBefore(gridItem, start);
+  function setGridPosition(div) {
+    const gridContainer = document.getElementById('color-grid');
+    const Viewport = window.innerWidth;
+    const gridItem = document.getElementById(div);
+    const gap = 0.005 * Viewport; // Consider using CSS for this
+    const gridItemSize = 0.05 * Viewport; 
+    const ItemExpanded = gridItemSize * 6 + gap * 4; 
+  
+    // Calculate grid properties dynamically
+    const ContainerWidth = gridContainer.clientWidth; // Use clientWidth
+    const ItemWidth = gridItemSize + gap;
+    const ItemNumber = parseInt(gridItem.dataset.number); // Ensure numeric
+  
+    const itemsPerRow = Math.floor(ContainerWidth / ItemWidth);
+    const ItemPositionRow = (ItemNumber - 1) % itemsPerRow + 1; // 1-indexed
+    const ItemPositionColumn = Math.floor((ItemNumber - 1) / itemsPerRow) + 1; 
+  
+    // Move if near the end of the row
+    if (ItemPositionRow > itemsPerRow - 5) {
+      const start = document.getElementById('grid-item-' + ((itemsPerRow * ItemPositionColumn) - 5));
+      if (start) { // Check if the starting element exists
+        gridContainer.insertBefore(gridItem, start);
+      } 
     }
-    
+  
+    // Apply expanded styling
     gridItem.style.gridColumn = 'span 6';
-    gridItem.style.width =  ItemExpanded + 'px';
+    gridItem.style.width = ItemExpanded + 'px';
     gridItem.style.height = ItemExpanded + 'px';
-}
-
-function resetGridPosition(div) {
-  const gridContainer = document.getElementById('color-grid');
-  const gridItem = document.getElementById(div);
-  const divNumber = gridItem.dataset.number;
-  const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
-  gridContainer.insertBefore(gridItem, followingDiv);
-
-  gridItem.style.gridColumn = 'span 1';
-  gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
-  gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
-}
-
-
-
-
-/*
-function setGridPosition(div) {
-  const gridContainer = document.getElementById('color-grid');
-  const Viewport = window.innerWidth;
-  const gridItem = document.getElementById(div);
-  const gap = 0.005 * Viewport;
-
-  const ContainerWidth = gridContainer.offsetWidth;
-  const ItemWidth = gridItem.offsetWidth + gap;
-  const ItemNumber = gridItem.dataset.number;
-  const RowLenght = Math.round(ContainerWidth / ItemWidth);
-  let ItemPositionRow = 0;
-  let ItemPositionColumn = Math.round(ItemNumber / RowLenght);
-
-  if (ItemNumber % RowLenght === 0) {
-    ItemPositionRow = RowLenght;
-  } else {
-    ItemPositionRow = ItemNumber % RowLenght;
   }
-  if (ItemPositionRow > RowLenght - 5) {
-      const start = document.getElementById('grid-item-' + (ItemPositionRow - 5));
-      gridContainer.insertBefore(gridItem, start);
-    }
+
+    function resetGridPosition(div) {
+      const gridContainer = document.getElementById('color-grid');
+      const gridItem = document.getElementById(div);
+      const divNumber = gridItem.dataset.number;
+      const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
+      gridContainer.insertBefore(gridItem, followingDiv);
     
-    gridItem.style.gridColumn = 'span 6';
-    gridItem.style.width = 'calc(var(--grid-item-size) * 6)';
-    gridItem.style.height = 'calc(var(--grid-item-size) * 6)';
-}
-
-function resetGridPosition(div) {
-  const gridContainer = document.getElementById('color-grid');
-  const gridItem = document.getElementById(div);
-  const divNumber = gridItem.dataset.number;
-  const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
-  gridContainer.insertBefore(gridItem, followingDiv);
-
-  gridItem.style.gridColumn = 'span 1';
-  gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
-  gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
-}
-*/  
-
-
-
-
-
-
+      gridItem.style.gridColumn = 'span 1';
+      gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
+      gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
+    }
 
 //  ### Main function ### //
 
