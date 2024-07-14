@@ -105,7 +105,6 @@ function clickColorCard() {
 }
 
 function selectItem(selectedDiv) {
-  console.log('Selecting ' + selectedDiv.id);
   selectionStatus = selectedDiv.id;
   selectedDiv.classList.add('selected');
   selectedDiv.style.backgroundColor = '#f0f0f0';
@@ -116,10 +115,8 @@ function selectItem(selectedDiv) {
 }
 
 function deselectItem(selectionStat) {
-  console.log('Deselecting ' + selectionStat);
   selectedDiv = document.getElementById(selectionStat);
   selectionStatus = null;
-  console.log(selectionStatus);
   selectedDiv.classList.remove('selected');
   selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
   selectedDiv.style.border = '0px solid ' + selectedDiv.dataset.value;
