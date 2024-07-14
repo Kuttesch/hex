@@ -2,7 +2,7 @@
 
 const numDivs = 2000;
 let number = 0;
-let selectionStatus = false;
+let selectionStatus = null;
 
 //  ### Function to generate random unique hex color code ### //
 
@@ -74,9 +74,6 @@ function createAndAppendDiv() {
 
 function titleColor() {
   const title = document.getElementById('title');
-
-  //console.log('titleColor() called');
-
   title.style.color = randomUniqueHexColorCode();
 }
 
@@ -87,42 +84,48 @@ function toggleSidebar() {
   const main = document.getElementById('main');
   const colorGrid = document.getElementById('color-grid');
 
-  //console.log('toggleSidebar() called');
-
   sidebar.classList.toggle('expanded');
   main.classList.toggle('expanded');
   colorGrid.classList.toggle('expanded');
 }
 
 function clickColorCard() {
-  const selectedDiv = document.getElementById(this.id);
-  selectedDiv.classList.toggle('selected');
-  
-  //console.log(selectedDiv.dataset.value);
-  if (selectionStatus === false) {
-    selectionStatus = true;
-    //console.log('true');
-    selectedDiv.style.backgroundColor = '#f0f0f0';
-    //console.log('BackgroundColor:' + selectedDiv.style.backgroundColor);
-    selectedDiv.style.border = '0.5vh solid' + selectedDiv.dataset.value;
-    //console.log('BorderColor:' + selectedDiv.style.borderColor);
-    selectedDiv.style.marginLeft = '0.25vh';
-    selectedDiv.style.marginTop = '0.25vh';
-    setGridPosition(this.id);
+  const selectedDiv = this;
+  const selectedDivId = selectedDiv.id;
 
+    console.log('SelectionStatus: ' + selectionStatus);
+   if (selectionStatus === null) {
+    selectItem(selectedDiv);
+  } else if (selectionStatus === selectedDivId) { 
+    deselectItem(selectedDivId);
+  } else {
+    deselectItem(selectionStatus);
+    selectItem(selectedDiv);
   }
-  else if (selectionStatus === true){
-    selectionStatus = false;
-    //console.log('false');
-    selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
-    //console.log('BackgroundColor:' + selectedDiv.style.backgroundColor);
-    selectedDiv.style.border = '0px solid' + selectedDiv.dataset.value;
-    //console.log('BorderColor:' + selectedDiv.style.borderColor);
-    selectedDiv.style.marginLeft = '0';
-    selectedDiv.style.marginTop = '0';
-    resetGridPosition(this.id);
-  }
+}
 
+function selectItem(selectedDiv) {
+  console.log('Selecting ' + selectedDiv.id);
+  selectionStatus = selectedDiv.id;
+  selectedDiv.classList.add('selected');
+  selectedDiv.style.backgroundColor = '#f0f0f0';
+  selectedDiv.style.border = '0.5vh solid ' + selectedDiv.dataset.value; // Add space for readability
+  selectedDiv.style.marginLeft = '0.25vh';
+  selectedDiv.style.marginTop = '0.25vh';
+  setGridPosition(selectedDiv.id);
+}
+
+function deselectItem(selectionStat) {
+  console.log('Deselecting ' + selectionStat);
+  selectedDiv = document.getElementById(selectionStat);
+  selectionStatus = null;
+  console.log(selectionStatus);
+  selectedDiv.classList.remove('selected');
+  selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
+  selectedDiv.style.border = '0px solid ' + selectedDiv.dataset.value;
+  selectedDiv.style.marginLeft = '0';
+  selectedDiv.style.marginTop = '0';
+  resetGridPosition(selectedDiv.id);
 }
 
 function setGridPosition(div) {
@@ -132,37 +135,25 @@ function setGridPosition(div) {
   const gap = 0.005 * Viewport;
 
   const ContainerWidth = gridContainer.offsetWidth;
-  //console.log('ContainerWidth:' + ContainerWidth);
-
   const ItemWidth = gridItem.offsetWidth + gap;
-  //console.log('DivWidth:' + ItemWidth);
-
   const ItemNumber = gridItem.dataset.number;
-  //console.log('DivNumber:' + ItemNumber);
-
   const RowLenght = Math.round(ContainerWidth / ItemWidth);
-  //console.log('RowLenght:' + RowLenght);
-
   let ItemPositionRow = 0;
-
   let ItemPositionColumn = Math.round(ItemNumber / RowLenght);
 
   if (ItemNumber % RowLenght === 0) {
     ItemPositionRow = RowLenght;
-    //console.log('ItemPosition is Rowlenght:' + ItemPositionRow);
   } else {
     ItemPositionRow = ItemNumber % RowLenght;
-    //console.log('ItemPosition:' + ItemPositionRow);
   }
-  if (ItemPositionRow > RowLenght - 3) {
-      const start = document.getElementById('grid-item-' + (ItemPositionRow - 3));
+  if (ItemPositionRow > RowLenght - 5) {
+      const start = document.getElementById('grid-item-' + (ItemPositionRow - 5));
       gridContainer.insertBefore(gridItem, start);
-      //console.log('moved' + gridItem + 'before' + start);
     }
     
-    gridItem.style.gridColumn = 'span 4';
-    gridItem.style.width = 'calc(var(--grid-item-size) * 4)';
-    gridItem.style.height = 'calc(var(--grid-item-size) * 4)';
+    gridItem.style.gridColumn = 'span 6';
+    gridItem.style.width = 'calc(var(--grid-item-size) * 6)';
+    gridItem.style.height = 'calc(var(--grid-item-size) * 6)';
 }
 
 function resetGridPosition(div) {
@@ -175,7 +166,50 @@ function resetGridPosition(div) {
   gridItem.style.gridColumn = 'span 1';
   gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
   gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
-}  
+}
+
+
+
+
+/* function clickColorCard() {
+  const selectedDiv = document.getElementById(this.id);
+  selectedDiv.classList.toggle('selected');
+  
+  if (selectionStatus === false) {
+    selectionStatus = true;
+    selectedElement = selectedDiv.id;
+    console.log(selectedElement);
+    selectItem(selectedDiv);
+
+  }
+  else if (selectionStatus === true){
+    deselectItem(selectedElement);
+    selectedElement = selectedDiv.id;
+    selectionStatus = false;
+    
+    deselectItem(selectedDiv);
+  }
+
+}
+
+function selectItem(selectedDiv) {
+selectedDiv.style.backgroundColor = '#f0f0f0';
+selectedDiv.style.border = '0.5vh solid' + selectedDiv.dataset.value;
+selectedDiv.style.marginLeft = '0.25vh';
+selectedDiv.style.marginTop = '0.25vh';
+setGridPosition(selectedDiv.id);
+}
+
+function deselectItem(selectedDiv) {
+  selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
+    selectedDiv.style.border = '0px solid' + selectedDiv.dataset.value;
+    selectedDiv.style.marginLeft = '0';
+    selectedDiv.style.marginTop = '0';
+    resetGridPosition(selectedDiv.id);
+
+}
+
+ */  
 
 //  ### Main function ### //
 
@@ -183,7 +217,6 @@ function main() {
   for (let i = 0; i < numDivs; i++) {
     createAndAppendDiv();
   }
-  //console.log(number);
   titleColor();
 }
 
@@ -202,11 +235,9 @@ window.addEventListener('scroll', () => {
 
   if (scrollY + viewportHeight >= documentHeight - 100) {
     
-    //console.log('EventListener() scroll event called');
     for (let i = 0; i < numDivs; i++) {
       createAndAppendDiv();
     }
-    //console.log(number);
   }
 });
 
