@@ -173,7 +173,8 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.5s ease;
+    /* transition: all 0.5s ease; */
+    transition: none;
 }
 
 .grid-item.selected {
@@ -182,6 +183,7 @@ h1 {
     border-radius: 2%;
     transition: all 0.5s ease;
     background-color: #f0f0f0;
+    transition: none;
 }
 
 .grid-item.selected:hover {

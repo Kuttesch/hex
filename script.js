@@ -19,7 +19,7 @@ let selectionStatus = false;
         return color; 
       }
       else {
-        console.log('Duplicate color found: ' + color);
+        //console.log('Duplicate color found: ' + color);
         randomUniqueHexColorCode();
       }
     }
@@ -75,7 +75,7 @@ function createAndAppendDiv() {
 function titleColor() {
   const title = document.getElementById('title');
 
-  console.log('titleColor() called');
+  //console.log('titleColor() called');
 
   title.style.color = randomUniqueHexColorCode();
 }
@@ -87,7 +87,7 @@ function toggleSidebar() {
   const main = document.getElementById('main');
   const colorGrid = document.getElementById('color-grid');
 
-  console.log('toggleSidebar() called');
+  //console.log('toggleSidebar() called');
 
   sidebar.classList.toggle('expanded');
   main.classList.toggle('expanded');
@@ -98,14 +98,14 @@ function clickColorCard() {
   const selectedDiv = document.getElementById(this.id);
   selectedDiv.classList.toggle('selected');
   
-  console.log(selectedDiv.dataset.value);
+  //console.log(selectedDiv.dataset.value);
   if (selectionStatus === false) {
     selectionStatus = true;
-    console.log('true');
+    //console.log('true');
     selectedDiv.style.backgroundColor = '#f0f0f0';
-    console.log('BackgroundColor:' + selectedDiv.style.backgroundColor);
+    //console.log('BackgroundColor:' + selectedDiv.style.backgroundColor);
     selectedDiv.style.border = '0.5vh solid' + selectedDiv.dataset.value;
-    console.log('BorderColor:' + selectedDiv.style.borderColor);
+    //console.log('BorderColor:' + selectedDiv.style.borderColor);
     selectedDiv.style.marginLeft = '0.25vh';
     selectedDiv.style.marginTop = '0.25vh';
     setGridPosition(this.id);
@@ -113,11 +113,11 @@ function clickColorCard() {
   }
   else if (selectionStatus === true){
     selectionStatus = false;
-    console.log('false');
+    //console.log('false');
     selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
-    console.log('BackgroundColor:' + selectedDiv.style.backgroundColor);
+    //console.log('BackgroundColor:' + selectedDiv.style.backgroundColor);
     selectedDiv.style.border = '0px solid' + selectedDiv.dataset.value;
-    console.log('BorderColor:' + selectedDiv.style.borderColor);
+    //console.log('BorderColor:' + selectedDiv.style.borderColor);
     selectedDiv.style.marginLeft = '0';
     selectedDiv.style.marginTop = '0';
     resetGridPosition(this.id);
@@ -132,36 +132,37 @@ function setGridPosition(div) {
   const gap = 0.005 * Viewport;
 
   const ContainerWidth = gridContainer.offsetWidth;
-  console.log('ContainerWidth:' + ContainerWidth);
+  //console.log('ContainerWidth:' + ContainerWidth);
 
   const ItemWidth = gridItem.offsetWidth + gap;
-  console.log('DivWidth:' + ItemWidth);
+  //console.log('DivWidth:' + ItemWidth);
 
   const ItemNumber = gridItem.dataset.number;
-  console.log('DivNumber:' + ItemNumber);
+  //console.log('DivNumber:' + ItemNumber);
 
   const RowLenght = Math.round(ContainerWidth / ItemWidth);
-  console.log('RowLenght:' + RowLenght);
+  //console.log('RowLenght:' + RowLenght);
 
-  let ItemPosition = 0;
+  let ItemPositionRow = 0;
+
+  let ItemPositionColumn = Math.round(ItemNumber / RowLenght);
 
   if (ItemNumber % RowLenght === 0) {
-    ItemPosition = RowLenght;
-    console.log('ItemPosition is Rowlenght:' + ItemPosition);
+    ItemPositionRow = RowLenght;
+    //console.log('ItemPosition is Rowlenght:' + ItemPositionRow);
   } else {
-    ItemPosition = ItemNumber % RowLenght;
-    console.log('ItemPosition:' + ItemPosition);
+    ItemPositionRow = ItemNumber % RowLenght;
+    //console.log('ItemPosition:' + ItemPositionRow);
   }
-  if (ItemPosition > RowLenght - 3) {
-      const start = document.getElementById('grid-item-' + (RowLenght - 3));
+  if (ItemPositionRow > RowLenght - 3) {
+      const start = document.getElementById('grid-item-' + (ItemPositionRow - 3));
       gridContainer.insertBefore(gridItem, start);
-      console.log('moved' + gridItem + 'before' + start);
-      
-      gridItem.style.gridColumn = 'span 4';
-      gridItem.style.width = 'calc(var(--grid-item-size) * 4)';
-      gridItem.style.height = 'calc(var(--grid-item-size) * 4)';
-
+      //console.log('moved' + gridItem + 'before' + start);
     }
+    
+    gridItem.style.gridColumn = 'span 4';
+    gridItem.style.width = 'calc(var(--grid-item-size) * 4)';
+    gridItem.style.height = 'calc(var(--grid-item-size) * 4)';
 }
 
 function resetGridPosition(div) {
@@ -182,7 +183,7 @@ function main() {
   for (let i = 0; i < numDivs; i++) {
     createAndAppendDiv();
   }
-  console.log(number);
+  //console.log(number);
   titleColor();
 }
 
@@ -201,11 +202,11 @@ window.addEventListener('scroll', () => {
 
   if (scrollY + viewportHeight >= documentHeight - 100) {
     
-    console.log('EventListener() scroll event called');
+    //console.log('EventListener() scroll event called');
     for (let i = 0; i < numDivs; i++) {
       createAndAppendDiv();
     }
-    console.log(number);
+    //console.log(number);
   }
 });
 
