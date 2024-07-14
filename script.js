@@ -89,7 +89,7 @@ function toggleSidebar() {
   colorGrid.classList.toggle('expanded');
 }
 
-function clickColorCard() {
+async function clickColorCard() {
   const selectedDiv = this;
   const selectedDivId = selectedDiv.id;
 
@@ -100,6 +100,7 @@ function clickColorCard() {
     deselectItem(selectedDivId);
   } else {
     deselectItem(selectionStatus);
+    await new Promise(r => setTimeout(r, 500));
     selectItem(selectedDiv);
   }
 }
@@ -125,6 +126,53 @@ function deselectItem(selectionStat) {
   resetGridPosition(selectedDiv.id);
 }
 
+function setGridPosition(div) {
+  const gridContainer = document.getElementById('color-grid');
+  const Viewport = window.innerWidth;
+  const gridItem = document.getElementById(div);
+  const gap = 0.005 * Viewport;
+  const gridItemSize = 0.05 * Viewport;
+
+  const ItemExpanded = gridItemSize * 6 + gap * 4;
+
+  const ContainerWidth = gridContainer.offsetWidth;
+  const ItemWidth = gridItem.offsetWidth + gap;
+  const ItemNumber = gridItem.dataset.number;
+  const RowLenght = Math.round(ContainerWidth / ItemWidth);
+  let ItemPositionRow = 0;
+  let ItemPositionColumn = Math.round(ItemNumber / RowLenght);
+
+  if (ItemNumber % RowLenght === 0) {
+    ItemPositionRow = RowLenght;
+  } else {
+    ItemPositionRow = ItemNumber % RowLenght;
+  }
+  if (ItemPositionRow > RowLenght - 5) {
+      const start = document.getElementById('grid-item-' + (ItemPositionRow - 5));
+      gridContainer.insertBefore(gridItem, start);
+    }
+    
+    gridItem.style.gridColumn = 'span 6';
+    gridItem.style.width =  ItemExpanded + 'px';
+    gridItem.style.height = ItemExpanded + 'px';
+}
+
+function resetGridPosition(div) {
+  const gridContainer = document.getElementById('color-grid');
+  const gridItem = document.getElementById(div);
+  const divNumber = gridItem.dataset.number;
+  const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
+  gridContainer.insertBefore(gridItem, followingDiv);
+
+  gridItem.style.gridColumn = 'span 1';
+  gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
+  gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
+}
+
+
+
+
+/*
 function setGridPosition(div) {
   const gridContainer = document.getElementById('color-grid');
   const Viewport = window.innerWidth;
@@ -164,49 +212,13 @@ function resetGridPosition(div) {
   gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
   gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
 }
+*/  
 
 
 
 
-/* function clickColorCard() {
-  const selectedDiv = document.getElementById(this.id);
-  selectedDiv.classList.toggle('selected');
-  
-  if (selectionStatus === false) {
-    selectionStatus = true;
-    selectedElement = selectedDiv.id;
-    console.log(selectedElement);
-    selectItem(selectedDiv);
 
-  }
-  else if (selectionStatus === true){
-    deselectItem(selectedElement);
-    selectedElement = selectedDiv.id;
-    selectionStatus = false;
-    
-    deselectItem(selectedDiv);
-  }
 
-}
-
-function selectItem(selectedDiv) {
-selectedDiv.style.backgroundColor = '#f0f0f0';
-selectedDiv.style.border = '0.5vh solid' + selectedDiv.dataset.value;
-selectedDiv.style.marginLeft = '0.25vh';
-selectedDiv.style.marginTop = '0.25vh';
-setGridPosition(selectedDiv.id);
-}
-
-function deselectItem(selectedDiv) {
-  selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
-    selectedDiv.style.border = '0px solid' + selectedDiv.dataset.value;
-    selectedDiv.style.marginLeft = '0';
-    selectedDiv.style.marginTop = '0';
-    resetGridPosition(selectedDiv.id);
-
-}
-
- */  
 
 //  ### Main function ### //
 
@@ -225,7 +237,7 @@ window.onload = main;
 
 // ### Event listener to append more divs when scrolling ### //
 
-window.addEventListener('scroll', () => {
+/* window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   const viewportHeight = window.innerHeight;
   const documentHeight = document.documentElement.scrollHeight;
@@ -236,5 +248,5 @@ window.addEventListener('scroll', () => {
       createAndAppendDiv();
     }
   }
-});
+}); */
 
