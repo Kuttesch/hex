@@ -163,13 +163,20 @@ var ItemSpanRow = 6;
       gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
     }
 
+    async function switchColorTitle() {
+
+      titleColor();
+      await new Promise(r => setTimeout(r, 2000));
+      switchColorTitle();
+    }
 //  ### Main function ### //
 
 function main() {
   for (let i = 0; i < numDivs; i++) {
     createAndAppendDiv();
   }
-  titleColor();
+  /* titleColor(); */
+  switchColorTitle();
 }
 
 //  ### Run main function ### //
