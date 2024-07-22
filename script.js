@@ -114,6 +114,8 @@ function deselectItem(selectionStat) {
   resetGridPosition(selectedDiv.id);
 }
 
+var ItemSpanColumn = 16;
+var ItemSpanRow = 6;
 
   function setGridPosition(div) {
     const gridContainer = document.getElementById('color-grid');
@@ -121,7 +123,8 @@ function deselectItem(selectionStat) {
     const gridItem = document.getElementById(div);
     const gap = 0.005 * Viewport; // Consider using CSS for this
     const gridItemSize = 0.05 * Viewport; 
-    const ItemExpanded = gridItemSize * 6 + gap * 4; 
+    const ItemExpandedColumn = gridItemSize * ItemSpanColumn + gap * (ItemSpanColumn - 2); 
+    const ItemExpandedRow = gridItemSize * ItemSpanRow + gap * (ItemSpanRow - 2);
   
     // Calculate grid properties dynamically
     const ContainerWidth = gridContainer.clientWidth; // Use clientWidth
@@ -134,16 +137,17 @@ function deselectItem(selectionStat) {
   
     // Move if near the end of the row
     if (ItemPositionRow > itemsPerRow - 5) {
-      const start = document.getElementById('grid-item-' + ((itemsPerRow * ItemPositionColumn) - 5));
+      const start = document.getElementById('grid-item-' + ((itemsPerRow * ItemPositionColumn) - (ItemSpanColumn - 1)));
       if (start) { // Check if the starting element exists
         gridContainer.insertBefore(gridItem, start);
       } 
     }
   
     // Apply expanded styling
-    gridItem.style.gridColumn = 'span 6';
-    gridItem.style.width = ItemExpanded + 'px';
-    gridItem.style.height = ItemExpanded + 'px';
+    gridItem.style.gridColumn = 'span ' + ItemSpanColumn;
+    gridItem.style.gridRow = 'span ' + ItemSpanRow;
+    gridItem.style.width = ItemExpandedColumn + 'px';
+    gridItem.style.height = ItemExpandedRow + 'px';
   }
 
     function resetGridPosition(div) {
@@ -154,6 +158,7 @@ function deselectItem(selectionStat) {
       gridContainer.insertBefore(gridItem, followingDiv);
     
       gridItem.style.gridColumn = 'span 1';
+      gridItem.style.gridRow = 'span 1';
       gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
       gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
     }

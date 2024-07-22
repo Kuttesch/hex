@@ -178,8 +178,6 @@ h1 {
 }
 
 .grid-item.selected {
-    /* grid-column: 3 / 7; */
-    grid-row: span 6;
     border-radius: 2%;
     transition: all 0.5s ease;
     background-color: #f0f0f0;
