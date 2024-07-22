@@ -77,7 +77,7 @@ function toggleSidebar() {
   colorGrid.classList.toggle('expanded');
 }
 
-async function clickColorCard() {
+function clickColorCard() {
   const selectedDiv = this;
   const selectedDivId = selectedDiv.id;
 
@@ -88,7 +88,7 @@ async function clickColorCard() {
     deselectItem(selectedDivId);
   } else {
     deselectItem(selectionStatus);
-    await new Promise(r => setTimeout(r, 500));
+    /* await new Promise(r => setTimeout(r, 500)); */
     selectItem(selectedDiv);
   }
 }
@@ -114,7 +114,7 @@ function deselectItem(selectionStat) {
   resetGridPosition(selectedDiv.id);
 }
 
-var ItemSpanColumn = 16;
+var ItemSpanColumn = 6;
 var ItemSpanRow = 6;
 
   function setGridPosition(div) {
