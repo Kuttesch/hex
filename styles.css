@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&display=swap");
 
 :root {
     --grid-item-size: 5vw;
@@ -6,7 +6,8 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 * {
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    scrollbar-width: none;
+    /* Hide scrollbar for Firefox */
     font-family: Bevan;
     transition: all 0.3s ease;
 }
@@ -33,7 +34,6 @@ body {
     overflow-x: hidden;
     background-color: #f0f0f0;
     user-select: none;
-        
 }
 
 .sidebar-button-container {
@@ -112,7 +112,7 @@ body {
     scroll-snap-align: start;
 }
 
-.header{
+.header {
     color: black;
     font-size: 2.5em;
 }
@@ -122,7 +122,7 @@ h1 {
     transition: all 2s ease;
 }
 
-.scrollDownContainer{
+.scrollDownContainer {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -148,14 +148,15 @@ h1 {
 
 .spacer {
     height: 10vh;
-} 
+}
 
 .color-grid {
     height: auto;
     width: 90vw;
     /* width: 88vw; */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-size), var(--grid-item-size)));
+    grid-template-columns: repeat(auto-fit,
+            minmax(var(--grid-item-size), var(--grid-item-size)));
     grid-auto-rows: var(--grid-item-size);
     gap: 0.5vw;
     justify-content: center;

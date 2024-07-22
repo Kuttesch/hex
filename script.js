@@ -6,25 +6,25 @@ let selectionStatus = null;
 
 //  ### Function to generate random unique hex color code ### //
 
-  const randomUniqueHexColorCode = () => {
-    const existingColors = new Set();
-  
-    //console.log('randomUniqueHexColorCode() called');
+const randomUniqueHexColorCode = () => {
+  const existingColors = new Set();
 
-    while (true) {
-      let color = randomHexCodeColor();
-  
-      if (!existingColors.has(color)) {
-        existingColors.add(color);
-        return color; 
-      }
-      else {
-        //console.log('Duplicate color found: ' + color);
-        randomUniqueHexColorCode();
-      }
+  //console.log('randomUniqueHexColorCode() called');
+
+  while (true) {
+    let color = randomHexCodeColor();
+
+    if (!existingColors.has(color)) {
+      existingColors.add(color);
+      return color;
     }
-    
-  };
+    else {
+      //console.log('Duplicate color found: ' + color);
+      randomUniqueHexColorCode();
+    }
+  }
+
+};
 
 const randomHexCodeColor = () => {
 
@@ -34,28 +34,28 @@ const randomHexCodeColor = () => {
   let color = '#' + n.padStart(6, '0');
   return color;
 }
-  
+
 //  ### Function to create and append divs ### //
 
 function createAndAppendDiv() {
   const container = document.querySelector('.color-grid');
   const newDiv = document.createElement('div');
 
- // console.log('createAndAppendDiv() called');
+  // console.log('createAndAppendDiv() called');
 
-    number++;
-    newDiv.classList.add('grid-item');
-    newDiv.id = 'grid-item-' + number;
-    newDiv.dataset.number = number;
-    newDiv.onclick = clickColorCard;
+  number++;
+  newDiv.classList.add('grid-item');
+  newDiv.id = 'grid-item-' + number;
+  newDiv.dataset.number = number;
+  newDiv.onclick = clickColorCard;
   let color = randomUniqueHexColorCode();
 
-    newDiv.innerHTML = `${number}`;
+  newDiv.innerHTML = `${number}`;
 
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
   container.appendChild(newDiv);
-  
+
 }
 
 //  ### Function to change title color ### //
@@ -81,10 +81,10 @@ function clickColorCard() {
   const selectedDiv = this;
   const selectedDivId = selectedDiv.id;
 
-    console.log('SelectionStatus: ' + selectionStatus);
-   if (selectionStatus === null) {
+  console.log('SelectionStatus: ' + selectionStatus);
+  if (selectionStatus === null) {
     selectItem(selectedDiv);
-  } else if (selectionStatus === selectedDivId) { 
+  } else if (selectionStatus === selectedDivId) {
     deselectItem(selectedDivId);
   } else {
     deselectItem(selectionStatus);
@@ -117,58 +117,57 @@ function deselectItem(selectionStat) {
 var ItemSpanColumn = 6;
 var ItemSpanRow = 6;
 
-  function setGridPosition(div) {
-    const gridContainer = document.getElementById('color-grid');
-    const Viewport = window.innerWidth;
-    const gridItem = document.getElementById(div);
-    const gap = 0.005 * Viewport; // Consider using CSS for this
-    const gridItemSize = 0.05 * Viewport; 
-    const ItemExpandedColumn = gridItemSize * ItemSpanColumn + gap * (ItemSpanColumn - 2); 
-    const ItemExpandedRow = gridItemSize * ItemSpanRow + gap * (ItemSpanRow - 2);
-  
-    // Calculate grid properties dynamically
-    const ContainerWidth = gridContainer.clientWidth; // Use clientWidth
-    const ItemWidth = gridItemSize + gap;
-    const ItemNumber = parseInt(gridItem.dataset.number); // Ensure numeric
-  
-    const itemsPerRow = Math.floor(ContainerWidth / ItemWidth);
-    const ItemPositionRow = (ItemNumber - 1) % itemsPerRow + 1; // 1-indexed
-    const ItemPositionColumn = Math.floor((ItemNumber - 1) / itemsPerRow) + 1; 
-  
-    // Move if near the end of the row
-    if (ItemPositionRow > itemsPerRow - 5) {
-      const start = document.getElementById('grid-item-' + ((itemsPerRow * ItemPositionColumn) - (ItemSpanColumn - 1)));
-      if (start) { // Check if the starting element exists
-        gridContainer.insertBefore(gridItem, start);
-      } 
+function setGridPosition(div) {
+  const gridContainer = document.getElementById('color-grid');
+  const Viewport = window.innerWidth;
+  const gridItem = document.getElementById(div);
+  const gap = 0.005 * Viewport; // Consider using CSS for this
+  const gridItemSize = 0.05 * Viewport;
+  const ItemExpandedColumn = gridItemSize * ItemSpanColumn + gap * (ItemSpanColumn - 2);
+  const ItemExpandedRow = gridItemSize * ItemSpanRow + gap * (ItemSpanRow - 2);
+
+  // Calculate grid properties dynamically
+  const ContainerWidth = gridContainer.clientWidth; // Use clientWidth
+  const ItemWidth = gridItemSize + gap;
+  const ItemNumber = parseInt(gridItem.dataset.number); // Ensure numeric
+
+  const itemsPerRow = Math.floor(ContainerWidth / ItemWidth);
+  const ItemPositionRow = (ItemNumber - 1) % itemsPerRow + 1; // 1-indexed
+  const ItemPositionColumn = Math.floor((ItemNumber - 1) / itemsPerRow) + 1;
+
+  // Move if near the end of the row
+  if (ItemPositionRow > itemsPerRow - 5) {
+    const start = document.getElementById('grid-item-' + ((itemsPerRow * ItemPositionColumn) - (ItemSpanColumn - 1)));
+    if (start) { // Check if the starting element exists
+      gridContainer.insertBefore(gridItem, start);
     }
-  
-    // Apply expanded styling
-    gridItem.style.gridColumn = 'span ' + ItemSpanColumn;
-    gridItem.style.gridRow = 'span ' + ItemSpanRow;
-    gridItem.style.width = ItemExpandedColumn + 'px';
-    gridItem.style.height = ItemExpandedRow + 'px';
   }
 
-    function resetGridPosition(div) {
-      const gridContainer = document.getElementById('color-grid');
-      const gridItem = document.getElementById(div);
-      const divNumber = gridItem.dataset.number;
-      const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
-      gridContainer.insertBefore(gridItem, followingDiv);
-    
-      gridItem.style.gridColumn = 'span 1';
-      gridItem.style.gridRow = 'span 1';
-      gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
-      gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
-    }
+  // Apply expanded styling
+  gridItem.style.gridColumn = 'span ' + ItemSpanColumn;
+  gridItem.style.gridRow = 'span ' + ItemSpanRow;
+  gridItem.style.width = ItemExpandedColumn + 'px';
+  gridItem.style.height = ItemExpandedRow + 'px';
+}
 
-    async function switchColorTitle() {
+function resetGridPosition(div) {
+  const gridContainer = document.getElementById('color-grid');
+  const gridItem = document.getElementById(div);
+  const divNumber = gridItem.dataset.number;
+  const followingDiv = document.getElementById('grid-item-' + (parseInt(divNumber) + 1));
+  gridContainer.insertBefore(gridItem, followingDiv);
 
-      titleColor();
-      await new Promise(r => setTimeout(r, 2000));
-      switchColorTitle();
-    }
+  gridItem.style.gridColumn = 'span 1';
+  gridItem.style.gridRow = 'span 1';
+  gridItem.style.width = 'calc(var(--grid-item-size) * 1)';
+  gridItem.style.height = 'calc(var(--grid-item-size) * 1)';
+}
+
+async function switchColorTitle() {
+  titleColor();
+  await new Promise(r => setTimeout(r, 2000));
+  switchColorTitle();
+}
 //  ### Main function ### //
 
 function main() {
