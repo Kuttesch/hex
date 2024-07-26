@@ -1,180 +1,264 @@
-@import url('https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&display=swap");
 
 :root {
-    --grid-item-size: 5vw;
+  --grid-item-size: 5vw;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
 * {
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-    font-family: Bevan;
-    transition: all 0.3s ease;
+  scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
+  font-family: Bevan;
+  transition: all 0.3s ease;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 *::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: start;
-    height: auto;
-    width: 100vw;
-    overflow-x: hidden;
-    background-color: #f0f0f0;
-    user-select: none;
-        
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: start;
+  height: auto;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: #f0f0f0;
+  user-select: none;
 }
 
 .sidebar-button-container {
-    z-index: 2;
-    position: fixed;
-    top: 1vh;
-    left: 1vw;
-    font-weight: bold;
-    color: #000000;
-    transition: all 0.3s ease;
+  z-index: 2;
+  position: fixed;
+  top: 1vh;
+  left: 1vw;
+  font-weight: bold;
+  color: #000000;
+  transition: all 0.3s ease;
 }
 
 .sidebar-button {
-    font-size: 2em !important;
-    transition: all 0.1s ease;
+  font-size: 2em !important;
+  transition: all 0.1s ease;
 }
 
 .sidebar-button:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .sidebar {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 15vw;
-    height: 100vh;
-    border-right: 1px solid black;
-    transform: translateX(-100%);
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 15vw;
+  height: 100vh;
+  border-right: 1px solid black;
+  transform: translateX(-100%);
 }
 
 .sidebar.expanded {
-    visibility: visible;
-    transform: translateX(0);
+  visibility: visible;
+  transform: translateX(0);
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* margin-left: 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 10vw;
     width: 90vw; */
-    width: 100vw;
-    margin-left: 0;
-    height: auto;
+  width: 100vw;
+  margin-left: 0;
+  height: auto;
 }
 
 .main.expanded {
-    margin-left: 15vw;
-    width: 85vw;
+  margin-left: 15vw;
+  width: 85vw;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 99%;
-    height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 99%;
+  height: auto;
 }
 
 .landing {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 
-    scroll-snap-align: start;
+  scroll-snap-align: start;
 }
 
-.header{
-    color: black;
-    font-size: 2.5em;
+.header {
+  color: black;
+  font-size: 2.5em;
 }
 
 h1 {
-    color: #000000;
+  color: #000000;
+  transition: all 2s ease;
 }
 
-.scrollDownContainer{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    bottom: 0%;
-    width: 100%;
-    color: black;
-    transition: all 0.1s ease;
+.scrollDownContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0%;
+  width: 100%;
+  color: black;
+  transition: all 0.1s ease;
 }
 
 .scrollDown {
-    font-size: 6em !important;
-    transition: all 0.1s ease;
+  font-size: 6em !important;
+  transition: all 0.1s ease;
 }
 
 .scrollDown:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .grid-container {
-    scroll-snap-align: start;
+  scroll-snap-align: start;
 }
 
 .spacer {
-    height: 10vh;
-} 
+  height: 10vh;
+}
 
 .color-grid {
-    height: auto;
-    width: 90vw;
-    /* width: 88vw; */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-size), var(--grid-item-size)));
-    grid-auto-rows: var(--grid-item-size);
-    gap: 0.5vh;
-    justify-content: center;
+  height: auto;
+  width: 90vw;
+  /* width: 88vw; */
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(var(--grid-item-size), var(--grid-item-size))
+  );
+  grid-auto-rows: var(--grid-item-size);
+  gap: 0.5vw;
+  justify-content: center;
+  transition: all 0.5s ease;
 }
 
 .color-grid.expanded {
-    width: 82vw;
+  width: 82vw;
 }
 
 .grid-item {
-    width: var(--grid-item-size);
-    height: var(--grid-item-size);
-    overflow: hidden;
-    border-radius: 10%;
+  width: var(--grid-item-size);
+  height: var(--grid-item-size);
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+  /* transition: none; */
+}
+
+.grid-item-content {
+    visibility: hidden;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .grid-item-top-content, .grid-item-bottom-content {
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    transition: all 0.1s ease;
+    width: 90%;
+    height: 40%;
+    margin: 5%;
+  }
+  
+  .grid-item-bottom-content {
+   justify-content: center;
+   font-size: 1.5em !important;
+   font-weight: bold;
+  }
+  
+  
+  .grid-item-expand-button {
+      font-size: 2.5em !important;
+      font-weight: bold;
+  }
+
+  .grid-item-text {
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .grid-item.selected {
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    background-color: #f0f0f0;
+  }
+  
+  .grid-item.selected .grid-item-content {
+    visibility: visible;
+  }
+
+
+
+/* 
+.grid-item-text {
+    display: none;
+  font-size: 0.1em;
+}
+
+.grid-item-expand-button {
+    visibility: hidden;
+    font-size: 0.1em;
+}
+
+.grid-item.selected {
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  background-color: #f0f0f0;
+
+}
+
+.grid-item.selected .grid-item-text {
+    display: block;
+}
+
+.grid-item.selected .grid-item-expand-button {
+    visibility: visible;
+    position: relative;
+    top: 0;
+    right: 0;
+} */
+
+.grid-item.selected:hover {
+  transform: none;
 }
 
 .grid-item:hover {
-    transform: scale(1.05);
+  transform: scale(1.1);
 }
