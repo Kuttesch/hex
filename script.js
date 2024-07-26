@@ -36,7 +36,6 @@ const randomHexCodeColor = () => {
 }
 
 //  ### Function to create and append divs ### //
-
 function createAndAppendDiv() {
   const container = document.querySelector('.color-grid');
   const newDiv = document.createElement('div');
@@ -96,7 +95,7 @@ function clickColorCard() {
 function selectItem(selectedDiv) {
   selectionStatus = selectedDiv.id;
   selectedDiv.classList.add('selected');
-  selectedDiv.style.backgroundColor = '#f0f0f0';
+  /* selectedDiv.style.backgroundColor = '#f0f0f0'; */
   selectedDiv.style.border = '0.5vh solid ' + selectedDiv.dataset.value; // Add space for readability
   selectedDiv.style.marginLeft = '0.25vh';
   selectedDiv.style.marginTop = '0.25vh';
@@ -114,8 +113,8 @@ function deselectItem(selectionStat) {
   resetGridPosition(selectedDiv.id);
 }
 
-var ItemSpanColumn = 6;
-var ItemSpanRow = 6;
+var ItemSpanColumn = 2;
+var ItemSpanRow = 2;
 
 function setGridPosition(div) {
   const gridContainer = document.getElementById('color-grid');
