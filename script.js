@@ -1,3 +1,5 @@
+import { setFontColor } from './modules/fontColor.js';
+
 //  ### Define Variables ### //
 
 const numDivs = 2000;
@@ -40,23 +42,69 @@ function createAndAppendDiv() {
   const container = document.querySelector('.color-grid');
   const newDiv = document.createElement('div');
 
-  // console.log('createAndAppendDiv() called');
-
   number++;
+
+  // ## Create new parent div ## //
   newDiv.classList.add('grid-item');
   newDiv.id = 'grid-item-' + number;
   newDiv.dataset.number = number;
   newDiv.onclick = clickColorCard;
   let color = randomUniqueHexColorCode();
-
-  newDiv.innerHTML = `${number}`;
-
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
+
+  // ## Append parent div to container ## //
   container.appendChild(newDiv);
 
 }
 
+function appendInnerDiv(div,color) {
+
+  const existingDiv = document.getElementById(div);
+  const newDivContent = document.createElement('div');
+  const newDivTopContent = document.createElement('div');
+  const newDivBottomContent = document.createElement('div');
+  const newDivText = document.createElement('div');
+  const newDivExpandButton = document.createElement('div');
+
+  // ## Create new content div ## //
+  newDivContent.classList.add('grid-item-content');
+
+  // ## Create new top content div ## //
+  newDivTopContent.classList.add('grid-item-top-content');
+
+  // ## Create new bottom content div ## //
+  newDivBottomContent.classList.add('grid-item-bottom-content');
+  newDivBottomContent.onclick = copyToClipboard;
+
+  // ## Create new text div ## //
+  newDivText.classList.add('grid-item-text');
+  newDivText.id = 'grid-item-text';
+  newDivText.innerHTML = color.toString().toUpperCase();
+  newDivText.style.color = setFontColor(newDivText, color);
+
+  // ## Create new expand button ## //
+  newDivExpandButton.classList.add('grid-item-expand-button');
+  newDivExpandButton.classList.add('material-symbols-outlined');
+  newDivExpandButton.id = 'grid-item-expand-button';
+  newDivExpandButton.innerHTML = 'open_in_new';
+  newDivExpandButton.style.color = setFontColor(newDivExpandButton,color);
+  newDivExpandButton.onclick = redirect;
+
+
+  // ## Append text div to parent div ## //
+  newDivTopContent.appendChild(newDivExpandButton);
+  newDivBottomContent.appendChild(newDivText);
+  newDivContent.appendChild(newDivTopContent);
+  newDivContent.appendChild(newDivBottomContent);
+  existingDiv.appendChild(newDivContent);
+}
+
+function removeInnerDiv(div) {
+  const existingDiv = document.getElementById(div);
+  const existingDivContent = existingDiv.querySelector('.grid-item-content');
+  existingDiv.removeChild(existingDivContent);
+}
 //  ### Function to change title color ### //
 
 function titleColor() {
@@ -64,8 +112,38 @@ function titleColor() {
   title.style.color = randomUniqueHexColorCode();
 }
 
-//
+// ### EventListener to toggle sidebar ### //
+window.addEventListener('click', function() {
+  const sidebarButton = document.getElementById('sidebar-button');
+  sidebarButton.onclick = toggleSidebar;
+});
 
+// ### EventListener to redirect to Subsite ### //
+function redirect() {
+  event.stopPropagation();
+  let url = window.location.href;
+  let color = this.parentElement.parentElement.parentElement.dataset.value;
+  console.log(color);
+     if (url.includes('index.html')) {
+      url = url.replace('index.html', `sub${color}`);
+    } else {
+      url = url + `sub${this.dataset.value}`;
+    }
+    console.log(url);
+    window.location.href = url;
+ /*  window.location.href = "https://www.google.com"; */
+}
+
+// ### EventListener to copy color code to clipboard ### //
+function copyToClipboard() {
+    event.stopPropagation();
+    const div = this;
+    const innerDiv = div.querySelector('.grid-item-text');
+    navigator.clipboard.writeText(innerDiv.innerHTML);
+    console.log('Copied: ' + innerDiv.innerHTML);
+  }
+
+// ### Function to toggle sidebar ### //
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   const main = document.getElementById('main');
@@ -100,10 +178,11 @@ function selectItem(selectedDiv) {
   selectedDiv.style.marginLeft = '0.25vh';
   selectedDiv.style.marginTop = '0.25vh';
   setGridPosition(selectedDiv.id);
+  appendInnerDiv(selectedDiv.id,selectedDiv.dataset.value);
 }
 
 function deselectItem(selectionStat) {
-  selectedDiv = document.getElementById(selectionStat);
+  const selectedDiv = document.getElementById(selectionStat);
   selectionStatus = null;
   selectedDiv.classList.remove('selected');
   selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
@@ -111,6 +190,7 @@ function deselectItem(selectionStat) {
   selectedDiv.style.marginLeft = '0';
   selectedDiv.style.marginTop = '0';
   resetGridPosition(selectedDiv.id);
+  removeInnerDiv(selectedDiv.id);
 }
 
 var ItemSpanColumn = 2;
@@ -179,13 +259,13 @@ function main() {
 
 //  ### Run main function ### //
 
-window.onload = main;
+document.addEventListener('DOMContentLoaded', main);
 
 
 
 // ### Event listener to append more divs when scrolling ### //
 
-/* window.addEventListener('scroll', () => {
+window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   const viewportHeight = window.innerHeight;
   const documentHeight = document.documentElement.scrollHeight;
@@ -196,5 +276,6 @@ window.onload = main;
       createAndAppendDiv();
     }
   }
-}); */
+});
+
 
