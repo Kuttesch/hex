@@ -1,8 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&display=swap");
 
-:root {
-  --grid-item-size: 5vw;
+@media only screen and (min-width: 500px){
+    :root {
+      --grid-item-size: 5vw;
+    }
 }
+
+@media only screen and (min-width: 400px) and (max-width: 500px) {
+
+  :root {
+      --grid-item-size: 8vw;
+    }
+}
+
+@media only screen and (max-width:400px) {
+    :root {
+      --grid-item-size: 12vw;
+    }
+}
+
 
 /* Hide scrollbar for IE, Edge and Firefox */
 * {
