@@ -127,7 +127,7 @@ function redirect() {
      if (url.includes('index.html')) {
       url = url.replace('index.html', `sub${color}`);
     } else {
-      url = url + `sub${this.dataset.value}`;
+      url = url + `sub${color}`;
     }
     console.log(url);
     window.location.href = url;
