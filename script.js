@@ -215,7 +215,7 @@ function setGridPosition(div) {
   const ItemPositionColumn = Math.floor((ItemNumber - 1) / itemsPerRow) + 1;
 
   // Move if near the end of the row
-  if (ItemPositionRow > itemsPerRow - 5) {
+  if (ItemPositionRow > itemsPerRow - ItemSpanColumn + 1) {
     const start = document.getElementById('grid-item-' + ((itemsPerRow * ItemPositionColumn) - (ItemSpanColumn - 1)));
     if (start) { // Check if the starting element exists
       gridContainer.insertBefore(gridItem, start);
