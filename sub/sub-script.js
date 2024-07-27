@@ -78,22 +78,31 @@ function setShades() {
   const baseColor = '#' + getHashValue();
   setBackgroundColorAndText('shade-4', calculateShade(baseColor, -4));
   setFontColor('shade-4', calculateShade(baseColor, -4));
+  initializeShade('shade-4');
   setBackgroundColorAndText('shade-3', calculateShade(baseColor, -3));
   setFontColor('shade-3', calculateShade(baseColor, -3));
+  initializeShade('shade-3');
   setBackgroundColorAndText('shade-2', calculateShade(baseColor, -2));
   setFontColor('shade-2', calculateShade(baseColor, -2));
+  initializeShade('shade-2');
   setBackgroundColorAndText('shade-1', calculateShade(baseColor, -1));
   setFontColor('shade-1', calculateShade(baseColor, -1));
+  initializeShade('shade-1');
   setBackgroundColorAndText('shade-0', baseColor);
   setFontColor('shade-0', baseColor);
+  initializeShade('shade-0');
   setBackgroundColorAndText('shade1', calculateShade(baseColor, 1));
   setFontColor('shade1', calculateShade(baseColor, 1));
+  initializeShade('shade1');
   setBackgroundColorAndText('shade2', calculateShade(baseColor, 2));
   setFontColor('shade2', calculateShade(baseColor, 2));
+  initializeShade('shade2');
   setBackgroundColorAndText('shade3', calculateShade(baseColor, 3));
   setFontColor('shade3', calculateShade(baseColor, 3));
+  initializeShade('shade3');
   setBackgroundColorAndText('shade4', calculateShade(baseColor, 4));
   setFontColor('shade4', calculateShade(baseColor, 4));
+  initializeShade('shade4');
 }
 
 function calculateRGB(color) {
@@ -166,13 +175,13 @@ function shadesOnClick(divname) {
   setSizeOnClick(divname);
 }
 
-function valueOnClick(divname, buttonname) {
+function valueOnClick(divname) {
   const div = document.getElementById(divname);
-  const button = document.getElementById(buttonname);
-
   navigator.clipboard.writeText(div.dataset.value);
+  console.log('Copied: ' + div.dataset.value);
 
   const value = div.dataset.value;
+  const button = div.getElementsByClassName('copy-icon')[0];
   button.style.color = value;
   setTimeout(() => {
     button.style.color = "";
@@ -218,6 +227,31 @@ function setSizeOnClick(divname) {
   }
 }
 
+// ### Initialize shade ### //
+
+function initializeShade(shade) {
+  const div = document.getElementById(shade);
+  div.onclick = function () {
+    shadesOnClick(shade);
+  }
+  console.log('shade initialized: ' + shade);
+}
+
+// ### Initialize value ### //
+function initializeValue(value, copyIcon) {
+  const div = document.getElementById(copyIcon);
+  div.onclick = function () {
+    valueOnClick(value);
+  }
+  console.log('value initialized: ' + value);
+}
+
+// ### Initialize all values ### //
+function initializeValues() {
+  initializeValue('value-hex', 'copy-hex');
+  initializeValue('value-rgb', 'copy-rgb');
+  initializeValue('value-hsl', 'copy-hsl');
+}
 // 
 
 function reloadSubSite() {
@@ -238,10 +272,12 @@ function main() {
   setShades();
   setValues('#' + getHashValue());
   setSizeOnClick('shade-0');
+  initializeValues();
   /* setMatchingColors(calculateHSL('#' + getHashValue())); */
 }
 
-window.onload = main;
+addEventListener('DOMContentLoaded', main);
+
 
 
 
