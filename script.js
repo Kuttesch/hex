@@ -166,7 +166,6 @@ function clickColorCard() {
     deselectItem(selectedDivId);
   } else {
     deselectItem(selectionStatus);
-    /* await new Promise(r => setTimeout(r, 500)); */
     selectItem(selectedDiv);
   }
 }
@@ -174,11 +173,12 @@ function clickColorCard() {
 function selectItem(selectedDiv) {
   selectionStatus = selectedDiv.id;
   selectedDiv.classList.add('selected');
-  /* selectedDiv.style.backgroundColor = '#f0f0f0'; */
-  selectedDiv.style.border = '0.5vh solid ' + selectedDiv.dataset.value; // Add space for readability
+    console.log('Selected: ' + selectedDiv.id);
+  /* selectedDiv.style.border = '0.5vh solid ' + selectedDiv.dataset.value; */
   selectedDiv.style.marginLeft = '0.25vh';
   selectedDiv.style.marginTop = '0.25vh';
   setGridPosition(selectedDiv.id);
+    console.log('Set Grid Position reached');
   appendInnerDiv(selectedDiv.id,selectedDiv.dataset.value);
 }
 
@@ -187,7 +187,7 @@ function deselectItem(selectionStat) {
   selectionStatus = null;
   selectedDiv.classList.remove('selected');
   selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
-  selectedDiv.style.border = '0px solid ' + selectedDiv.dataset.value;
+  /* selectedDiv.style.border = '0px solid ' + selectedDiv.dataset.value; */
   selectedDiv.style.marginLeft = '0';
   selectedDiv.style.marginTop = '0';
   resetGridPosition(selectedDiv.id);
@@ -197,37 +197,53 @@ function deselectItem(selectionStat) {
 var ItemSpanColumn = 2;
 var ItemSpanRow = 2;
 
+if (window.innerWidth < 600) {
+  ItemSpanColumn = 3;
+  ItemSpanRow = 1;
+}
+
 function setGridPosition(div) {
   const gridContainer = document.getElementById('color-grid');
   const Viewport = window.innerWidth;
   const gridItem = document.getElementById(div);
-  const gap = 0.005 * Viewport; // Consider using CSS for this
-  const gridItemSize = 0.05 * Viewport;
-  const ItemExpandedColumn = gridItemSize * ItemSpanColumn + gap * (ItemSpanColumn - 2);
-  const ItemExpandedRow = gridItemSize * ItemSpanRow + gap * (ItemSpanRow - 2);
+  const gap = 0.005 * Viewport;
+  let gridItemSize = 0.05 * Viewport;
+  let ItemExpandedColumn = gridItemSize * ItemSpanColumn + gap * (ItemSpanColumn - 1);
+  let ItemExpandedRow = gridItemSize * ItemSpanRow + gap * (ItemSpanRow - 1);
 
-  // Calculate grid properties dynamically
-  const ContainerWidth = gridContainer.clientWidth; // Use clientWidth
+  if (window.innerWidth < 600) {
+    gridItemSize = getGridElementSize();
+
+    ItemExpandedColumn = gridItemSize * ItemSpanColumn;
+    ItemExpandedRow = gridItemSize * ItemSpanRow;
+  }
+
+
+  const ContainerWidth = gridContainer.clientWidth;
   const ItemWidth = gridItemSize + gap;
-  const ItemNumber = parseInt(gridItem.dataset.number); // Ensure numeric
+  const ItemNumber = parseInt(gridItem.dataset.number);
 
   const itemsPerRow = Math.floor(ContainerWidth / ItemWidth);
-  const ItemPositionRow = (ItemNumber - 1) % itemsPerRow + 1; // 1-indexed
+  const ItemPositionRow = (ItemNumber - 1) % itemsPerRow + 1;
   const ItemPositionColumn = Math.floor((ItemNumber - 1) / itemsPerRow) + 1;
 
-  // Move if near the end of the row
+ 
   if (ItemPositionRow > itemsPerRow - ItemSpanColumn + 1) {
     const start = document.getElementById('grid-item-' + ((itemsPerRow * ItemPositionColumn) - (ItemSpanColumn - 1)));
-    if (start) { // Check if the starting element exists
+    if (start) {
       gridContainer.insertBefore(gridItem, start);
     }
   }
 
   // Apply expanded styling
   gridItem.style.gridColumn = 'span ' + ItemSpanColumn;
+    console.log('Set Grid Column span to:' + ItemSpanColumn);
   gridItem.style.gridRow = 'span ' + ItemSpanRow;
+    console.log('Set Grid Row span to:' + ItemSpanRow);
   gridItem.style.width = ItemExpandedColumn + 'px';
+    console.log('Set Grid Width to:' + ItemExpandedColumn);
   gridItem.style.height = ItemExpandedRow + 'px';
+    console.log('Set Grid Height to:' + ItemExpandedRow);
 }
 
 function resetGridPosition(div) {
@@ -252,10 +268,11 @@ async function switchColorTitle() {
 // ### Function to set the size of the grid elements on mobile devices ### //
 
 function setGridElementSize() {
+  if (window.innerWidth < 600) {
     const gridElementSize = getGridElementSize();
     const root = document.documentElement;
     root.style.setProperty('--grid-item-size', gridElementSize + 'px');
-
+  }
 }
 
 
