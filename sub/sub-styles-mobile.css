@@ -1,0 +1,6 @@
+@media (max-width: 600px) {
+    .value-text {
+        width: 80%;
+        margin-left: 10%;
+    }
+}

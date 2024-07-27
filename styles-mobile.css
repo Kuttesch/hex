@@ -1,4 +1,9 @@
 @media (max-width: 600px) {
+    
+    .header {
+        margin-left: 5vw;
+    }
+    
     .grid-item-content {
         flex-direction: row-reverse;
     }
@@ -13,4 +18,6 @@
         height: 100%;
         width: 40%;
     }
+
+
 }

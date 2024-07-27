@@ -198,6 +198,7 @@ var ItemSpanColumn = 2;
 var ItemSpanRow = 2;
 
 if (window.innerWidth < 600) {
+  console.log('Inner Width: ' + window.innerWidth);
   ItemSpanColumn = 3;
   ItemSpanRow = 1;
 }
@@ -277,7 +278,6 @@ function setGridElementSize() {
 
 
 //  ### Main function ### //
-
 function main() {
   for (let i = 0; i < numDivs; i++) {
     createAndAppendDiv();
