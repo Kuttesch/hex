@@ -1,4 +1,5 @@
 import { setFontColor } from './modules/fontColor.js';
+import {getGridElementSize} from './modules/mediaQuery.js';
 
 //  ### Define Variables ### //
 
@@ -247,6 +248,17 @@ async function switchColorTitle() {
   await new Promise(r => setTimeout(r, 2000));
   switchColorTitle();
 }
+
+// ### Function to set the size of the grid elements on mobile devices ### //
+
+function setGridElementSize() {
+    const gridElementSize = getGridElementSize();
+    const root = document.documentElement;
+    root.style.setProperty('--grid-item-size', gridElementSize + 'px');
+
+}
+
+
 //  ### Main function ### //
 
 function main() {
@@ -255,6 +267,7 @@ function main() {
   }
   /* titleColor(); */
   switchColorTitle();
+  setGridElementSize();
 }
 
 //  ### Run main function ### //
