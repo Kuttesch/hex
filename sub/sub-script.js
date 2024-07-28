@@ -158,20 +158,30 @@ function setValues(color) {
   const textRGB = document.getElementById('text-rgb');
   const valueHSL = document.getElementById('value-hsl');
   const textHSL = document.getElementById('text-hsl');
-
+if (window.innerWidth > 600){
   textHEX.textContent = 'HEX: ' + color;
   valueHEX.dataset.value = color;
   textRGB.textContent = 'RGB(' + calculateRGB(color) + ')';
   valueRGB.dataset.value = 'rgb(' + calculateRGB(color) + ')';
   textHSL.textContent = 'HSL(' + calculateHSL(color) + ')';
   valueHSL.dataset.value = 'hsl(' + calculateHSL(color) + ')';
+} else {
+  console.log('innerWidth:', window.innerWidth);
+  
+  textHEX.textContent = color.toUpperCase();
+  valueHEX.dataset.value = color;
+  textRGB.textContent = 'rgb(' + calculateRGB(color) + ')';
+  valueRGB.dataset.value = 'rgb(' + calculateRGB(color) + ')';
+  textHSL.textContent = 'hsl(' + calculateHSL(color) + ')';
+  valueHSL.dataset.value = 'hsl(' + calculateHSL(color) + ')';
+}
 }
 
 function shadesOnClick(divname) {
   const div = document.getElementById(divname);
   setValues('#' + div.dataset.value);
   console.log('onClick for ' + div.dataset.value);
-
+  initializeValues();
   setSizeOnClick(divname);
 }
 
@@ -179,13 +189,20 @@ function valueOnClick(divname) {
   const div = document.getElementById(divname);
   navigator.clipboard.writeText(div.dataset.value);
   console.log('Copied: ' + div.dataset.value);
-
   const value = div.dataset.value;
-  const button = div.getElementsByClassName('copy-icon')[0];
-  button.style.color = value;
-  setTimeout(() => {
-    button.style.color = "";
-  }, 1000);
+
+  if (window.innerWidth < 600){
+    div.style.color = value;
+    setTimeout(() => {
+      div.style.color = "";
+    }, 1000);
+  } else {  
+    const button = div.getElementsByClassName('copy-icon')[0];
+    button.style.color = value;
+    setTimeout(() => {
+      button.style.color = "";
+    }, 1000);
+  }
 }
 
 function calculateFontColor(color) {
@@ -240,9 +257,17 @@ function initializeShade(shade) {
 // ### Initialize value ### //
 function initializeValue(value, copyIcon) {
   const div = document.getElementById(copyIcon);
+  const divMobile = document.getElementById(value);
+  
+  if (window.innerWidth < 600){
+    divMobile.onclick = function () {
+      valueOnClick(value);
+    }
+  } else {
   div.onclick = function () {
     valueOnClick(value);
   }
+}
   console.log('value initialized: ' + value);
 }
 
@@ -263,9 +288,6 @@ function reloadSubSite() {
 
   main();
 }
-
-
-
 
 function main() {
   setTitle();

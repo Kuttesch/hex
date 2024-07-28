@@ -116,6 +116,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 90%;
+    transition: all 0.3s ease;  
 }
 
 .copy-icon {

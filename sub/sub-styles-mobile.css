@@ -1,6 +1,13 @@
 @media (max-width: 600px) {
+    .value {
+        text-transform: none;
+    }
     .value-text {
-        width: 80%;
-        margin-left: 10%;
+        width: 100%;
+        font-size: 5vw;
+    }
+    .copy-icon {
+        width: 0;
+        visibility: hidden;
     }
 }
