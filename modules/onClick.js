@@ -6,8 +6,16 @@
  * @exports redirect
  * @exports copyToClipboard
  * @exports toggleSidebar
+ * @exports shadesOnClick
+ * @exports setSizeOnClick
+ * @exports valueOnClick
+ * @exports reloadSubSite
  * 
  */
+
+import { setValues, initializeValues } from "./values.js";
+import { randomHexCodeColor } from "./color.js";
+import { main } from "../sub/sub-script.js";
 
 /**
  * Function to redirect the user to the subpage of the color.
@@ -57,7 +65,92 @@ function toggleSidebar() {
 }
 
 /**
+ * Function to resize the shade divs on click so the selected shade is the largest.
+ * 
+ * @param {DivId} divname 
+ */
+function setSizeOnClick(divname) {
+  const focus = document.getElementById(divname);
+  focus.position = focus.dataset.position;
+
+  console.log('focus: ' + focus.position);
+
+  for (let i = 1; i < 10; i++) {
+    const div = document.getElementsByClassName('shade--' + i)[0];
+    div.position = div.dataset.position;
+    div.style.width = 45 - Math.abs(div.position - focus.position) + 'vw';
+
+    if (Math.abs(focus.position - div.position) !== 0) {
+      div.style.height = '9vh';
+      console.log('height: ' + div.style.height);
+    } else {
+      div.style.height = '10vh';
+      console.log('height: ' + div.style.height);
+    }
+
+    console.log('position: ' + div.position);
+    console.log(Math.abs(div.position - focus.position));
+    console.log('width: ' + div.style.width);
+  }
+}
+
+/**
+ * Function that handles the click event on a shade div.
+ * 
+ * @param {DivId} divname 
+ */
+function shadesOnClick(divname) {
+  const div = document.getElementById(divname);
+  setValues('#' + div.dataset.value);
+  console.log('onClick for ' + div.dataset.value);
+  initializeValues();
+  setSizeOnClick(divname);
+}
+
+/**
+ * Function to set the behavior of the color value divs when clicked.
+ * 
+ * @param {DIvId} divname 
+ */
+function valueOnClick(divname) {
+  const div = document.getElementById(divname);
+  navigator.clipboard.writeText(div.dataset.value);
+  console.log('Copied: ' + div.dataset.value);
+  const value = div.dataset.value;
+
+  // Change the color of the div or the button depending on the screen size.
+  if (window.innerWidth < 600){
+    div.style.color = value;
+    setTimeout(() => {
+      div.style.color = "";
+    }, 1000);
+  } else {  
+    const button = div.getElementsByClassName('copy-icon')[0];
+    button.style.color = value;
+    setTimeout(() => {
+      button.style.color = "";
+    }, 1000);
+  }
+}
+
+/**
+ * Function to reload the subpage with a new random color on click.
+ * 
+ */
+function reloadSubSite() {
+  const url = window.location.href;
+  const baseUrl = url.split('#')[0];
+  const newUrl = baseUrl + randomHexCodeColor();
+  console.log('url:', newUrl);
+  window.location.href = newUrl;
+
+  main();
+}
+
+
+
+/**
  * Export the functions to be used in other modules.
  * 
  */
-export { redirect, copyToClipboard, toggleSidebar };
+export { redirect, copyToClipboard, toggleSidebar, shadesOnClick, setSizeOnClick, valueOnClick, reloadSubSite };
