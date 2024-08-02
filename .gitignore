@@ -2,3 +2,4 @@ src/color-card-expanded
 test/
 modules/textSize.js
 pywebview/
+.venv/
