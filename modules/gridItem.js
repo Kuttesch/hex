@@ -17,7 +17,8 @@ import { clickColorCard } from './itemSelection.js';
 /**
  * Variable to keep track of the number of grid items.
  */
-let number = 0;
+let gridItemCounter = 0;
+
 
 /**
  * Function to create a new div element and append it to the color grid.
@@ -26,15 +27,24 @@ let number = 0;
 function createAndAppendDiv() {
   const container = document.querySelector('.color-grid');
   const newDiv = document.createElement('div');
-  number++;
+  gridItemCounter++;
   newDiv.classList.add('grid-item');
-  newDiv.id = 'grid-item-' + number;
-  newDiv.dataset.number = number;
+  newDiv.id = 'grid-item-' + gridItemCounter;
+  newDiv.dataset.number = gridItemCounter;
   newDiv.onclick = clickColorCard;
   let color = randomUniqueHexCodeColor();
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
+
+  newDiv.innerHTML = gridItemCounter;
+
   container.appendChild(newDiv);
+}
+
+function removeDiv(DivNumber) {
+  const container = document.querySelector('.color-grid');
+  const div = document.getElementById('grid-item-' + DivNumber);
+  container.removeChild(div);
 }
 
 /**
@@ -104,4 +114,4 @@ function appendInnerDiv(div,color) {
 /**
  * Export the functions to be used in other modules.
  */
-export { appendInnerDiv, removeInnerDiv, createAndAppendDiv, getGridElementSize};
+export { appendInnerDiv, removeDiv, removeInnerDiv, createAndAppendDiv, getGridElementSize};

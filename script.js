@@ -7,16 +7,18 @@
   * 
 */
 
-import { randomUniqueHexCodeColor } from './modules/color.js';
+import { randomHexCodeColor } from './modules/color.js';
 import { toggleSidebar } from './modules/onClick.js';
-import { createAndAppendDiv } from './modules/gridItem.js';
+import { createAndAppendDiv, removeDiv } from './modules/gridItem.js';
 import { setGridElementSize } from './modules/itemSelection.js';
 
 /**
  * Number of divs to be appended to the page when the user scrolls to the bottom.
+ * All the colors are unique and are stored in a Set to avoid duplicates.
  * 
  */
 const numDivs = 2000;
+let shownGridItemCounter = 0;
 
 /** 
  * Event Listener for clicking the sidebar button.
@@ -39,12 +41,27 @@ window.addEventListener('scroll', () => {
   const documentHeight = document.documentElement.scrollHeight;
 
   if (scrollY + viewportHeight >= documentHeight - 100) {
-    
+    console.log('Bottom of the page ' + shownGridItemCounter);
     for (let i = 0; i < numDivs; i++) {
       createAndAppendDiv();
+      deleteTopDivs();
+      shownGridItemCounter++;
+      
     }
   }
 });
+
+function deleteTopDivs() {
+  if (shownGridItemCounter > numDivs * 2) {
+    console.log('deleteTOpDivs ' + shownGridItemCounter);
+    for (let i=0; i < numDivs; i++) {
+      removeDiv();
+      shownGridItemCounter--;
+    }
+  }
+  
+
+}
 
 /**
  * Function to switch the color of the title.
@@ -53,7 +70,7 @@ window.addEventListener('scroll', () => {
  */
 async function switchColorTitle() {
   const title = document.getElementById('title');
-  title.style.color = randomUniqueHexCodeColor();
+  title.style.color = randomHexCodeColor();
   await new Promise(r => setTimeout(r, 2000));
   switchColorTitle();
 }
@@ -66,6 +83,7 @@ async function switchColorTitle() {
 function main() {
   for (let i = 0; i < numDivs; i++) {
     createAndAppendDiv();
+    shownGridItemCounter++;
   }
   switchColorTitle();
   setGridElementSize();

@@ -12,22 +12,25 @@
  */
 
 /**
+ * Set to keep track of the existing colors.
+ */
+let existingColors = new Set();
+
+/**
  * Function to generate random hex colors using the randomHexCodeColor function and keep track of them using a Set.
  * 
  * @returns {HexColor} A random unique hex code color.
  * 
  */
 const randomUniqueHexCodeColor = () => {
-  const existingColors = new Set();
-
   while (true) {
     let color = randomHexCodeColor();
-
     if (!existingColors.has(color)) {
       existingColors.add(color);
       return color;
     }
     else {
+      console.log('Color already exists:', color);
       randomUniqueHexCodeColor();
     }
   }
