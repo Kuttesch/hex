@@ -32,7 +32,7 @@ body {
   height: auto;
   width: 100vw;
   overflow-x: hidden;
-  background-color: #f0f0f0;
+  /* background-color: #ffffff; */
   user-select: none;
 }
 
@@ -62,6 +62,18 @@ body {
 
 .sidebar-button:hover {
   transform: scale(1.2);
+}
+
+.theme-button {
+  position: fixed;
+  top: 1vh;
+  right: 1vw;
+  font-size: 2em !important;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+    transform: scale(1.2);
 }
 
 .sidebar {

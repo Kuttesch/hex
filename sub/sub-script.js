@@ -12,6 +12,7 @@ import { setShades } from '../modules/shades.js';
 import { setSizeOnClick } from '../modules/onClick.js';
 import { setValues, initializeValues } from '../modules/values.js';
 import { reloadSubSite } from '../modules/onClick.js';
+import { initializeTheme, toggleTheme } from '../modules/darkmode.js';
 
 function setTitle(){
   const title = document.getElementById('shade-0');
@@ -26,7 +27,13 @@ function initReload() {
   }
 }
 
+window.addEventListener('click', function() {
+  const themeButton = document.getElementById('theme-button');
+  themeButton.onclick = toggleTheme;
+});
+
 function main() {
+  initializeTheme();
   setTitle();
   setShades();
   setValues('#' + getHashValue());

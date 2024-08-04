@@ -6,6 +6,7 @@
  * @exports randomUniqueHexCodeColor
  * @exports randomHexCodeColor
  * @exports setFontColor
+ * @exports initializeFontColors
  * @exports setBackgroundColorAndText
  * @exports calculateRGB
  * @exports calculateHSL
@@ -72,6 +73,28 @@ function setFontColor(divname, color) {
   divname.style.color = calculateFontColor(color);
 }
 
+/**
+ * Function to set the border color of a div based on the background color using the calculateFontColor function to calculate the font color.
+ * 
+ * @param {Div} divname 
+ * @param {HexColor} color 
+ */
+function setBorderColor(divname, color) {
+  divname.style.borderColor = calculateFontColor(color);
+}
+
+/**
+ * Function to initialize the font colors of the divs with the class 'switch-color'.
+ */
+function initializeFontAndBorderColors() {
+  const divs = document.querySelectorAll('.switch-color');
+  const backgroundColor = localStorage.getItem('darkMode') === 'true' ? '#141314' : '#f0f0f0';
+  divs.forEach(div => {
+    setFontColor(div, backgroundColor);
+    setBorderColor(div, backgroundColor);
+    
+  });
+}
 /**
  * Function to set the background color and text of a div.
  * 
@@ -144,4 +167,4 @@ function calculateHSL(color) {
 /**
  * Export the functions to be used in other modules.
  */
-export { randomUniqueHexCodeColor, randomHexCodeColor, setFontColor, setBackgroundColorAndText, calculateRGB, calculateHSL };
+export { randomUniqueHexCodeColor, randomHexCodeColor, setFontColor, initializeFontAndBorderColors, setBackgroundColorAndText, calculateRGB, calculateHSL };

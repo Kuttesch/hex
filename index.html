@@ -16,8 +16,9 @@
 <body>
     <div class="loading-bar" id="loading-bar"></div>
     <div class="sidebar-button-container">
-        <i class="sidebar-button material-symbols-outlined" id="sidebar-button">side_navigation</i>
+        <i class="sidebar-button material-symbols-outlined switch-color" id="sidebar-button">side_navigation</i>
     </div>
+    <div class="theme-button material-icons switch-color" id="theme-button">light_mode</div>
     <nav class="sidebar" id="sidebar">
         <h1>HEX!</h1>
     </nav>
@@ -25,11 +26,11 @@
         <div class="content">
             <div class="landing">
                 <div class="header">
-                    <h1 id="title">HEX!</h1>
-                    <p>Find colors for your next Project!</p>
+                    <h1 class="title switch-color" id="title">HEX!</h1>
+                    <p class="switch-color">Find colors for your next Project!</p>
                 </div>
                 <div class="scrollDownContainer">
-                    <i class="scrollDown material-icons"
+                    <i class="scrollDown material-icons switch-color"
                         onclick="window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })">keyboard_arrow_down</i>
                 </div>
             </div>

@@ -10,4 +10,14 @@
         width: 0;
         visibility: hidden;
     }
+
+    .reload-container {
+        top: 5vh;
+        right: 5vw;
+    }
+
+    .theme-button {
+        top: 1vh;
+        right: 5vw;
+    }
 }

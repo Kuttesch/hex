@@ -18,7 +18,7 @@ body{
     z-index: 2;
     position: fixed;
     top: 1vh;
-    right: 1vw;
+    right: 5vw;
     font-weight: bold;
     color: #000000;
     transition: all 0.3s ease;
@@ -33,6 +33,17 @@ body{
     transform: scale(1.2);
 }
 
+.theme-button {
+    position: fixed;
+    top: 1vh;
+    right: 1vw;
+    font-size: 2em !important;
+    transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+    transform: scale(1.2);
+}
 
 .main{
     display: flex;
@@ -108,7 +119,9 @@ body{
     font-weight: bold;
     text-transform: uppercase;
     color: #000000;
-    background-color: #c0c0c0;
+    /* background-color: #c0c0c0; */
+    border: 2px solid;
+    border-color: #000000;
 }
 
 .value-text {

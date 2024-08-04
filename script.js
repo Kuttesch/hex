@@ -12,6 +12,7 @@ import { toggleSidebar } from './modules/onClick.js';
 import { appendDivsOnScroll, createNumOfDivs} from './modules/gridItem.js';
 import { setGridElementSize } from './modules/itemSelection.js';
 import { initializeLoadingBar} from './modules/progressBar.js';
+import { initializeTheme, toggleTheme } from './modules/darkmode.js';
 
 /** 
  * Event Listener for clicking the sidebar button.
@@ -21,6 +22,11 @@ import { initializeLoadingBar} from './modules/progressBar.js';
 window.addEventListener('click', function() {
   const sidebarButton = document.getElementById('sidebar-button');
   sidebarButton.onclick = toggleSidebar;
+});
+
+window.addEventListener('click', function() {
+  const themeButton = document.getElementById('theme-button');
+  themeButton.onclick = toggleTheme;
 });
 
 /**
@@ -50,6 +56,7 @@ async function switchColorTitle() {
  * 
  */
 function main() {
+  initializeTheme();
   createNumOfDivs();
   switchColorTitle();
   setGridElementSize();
