@@ -37,7 +37,7 @@ function createAndAppendDiv() {
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
 
-  newDiv.innerHTML = gridItemCounter;
+  /* newDiv.innerHTML = gridItemCounter; */
 
   container.appendChild(newDiv);
   getLoadingStatus();
