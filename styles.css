@@ -45,7 +45,7 @@ body {
   background-color: #000000;
 }
 
-.sidebar-button-container {
+/* .sidebar-button-container {
   z-index: 2;
   position: fixed;
   top: 1vh;
@@ -62,7 +62,7 @@ body {
 
 .sidebar-button:hover {
   transform: scale(1.2);
-}
+} */
 
 .theme-button {
   position: fixed;
