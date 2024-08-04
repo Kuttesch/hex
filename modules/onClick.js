@@ -14,7 +14,7 @@
  */
 
 import { setValues, initializeValues } from "./values.js";
-import { randomHexCodeColor } from "./color.js";
+import { initializeFontAndBorderColors, randomHexCodeColor, setFontColor } from "./color.js";
 import { main } from "../sub/sub-script.js";
 
 /**
@@ -122,7 +122,7 @@ function valueOnClick(divname) {
   if (window.innerWidth < 600){
     div.style.color = value;
     setTimeout(() => {
-      div.style.color = "";
+        initializeFontAndBorderColors();
     }, 1000);
   } else {  
     const button = div.getElementsByClassName('copy-icon')[0];
