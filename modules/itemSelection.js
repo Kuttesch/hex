@@ -4,11 +4,6 @@
  * @module itemSelection
  * 
  * @exports clickColorCard
- * @exports selectItem
- * @exports deselectItem
- * @exports setGridPosition
- * @exports resetGridPosition
- * @exports setGridElementSize
  * 
  */
 import { appendInnerDiv, removeInnerDiv } from "./gridItem.js";
@@ -192,4 +187,4 @@ function setGridElementSize() {
  * Export the functions to be used in other modules.
  * 
  */
-export { clickColorCard, selectItem, deselectItem, setGridPosition, resetGridPosition, setGridElementSize, };
+export { clickColorCard };
