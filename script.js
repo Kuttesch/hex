@@ -56,11 +56,11 @@ async function switchColorTitle() {
  * 
  */
 function main() {
+  initializeLoadingBar();
   initializeTheme();
   createNumOfDivs();
   switchColorTitle();
   setGridElementSize();
-  initializeLoadingBar();
 }
 
 /**

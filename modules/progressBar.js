@@ -36,6 +36,17 @@ function getLoadingStatus() {
 }
 
 /**
+ * Function to simulate the loading bar for the sub pages.
+ * This is only asthetic and does not affect the functionality of the page nor has any real purpose or hooks to other functions.
+ */
+function loadingBarSubSite() {
+    initializeLoadingBar();
+    for (let i = 0; i < 2000; i++) {
+        getLoadingStatus();
+    }
+}
+
+/**
  * Function to set the width of the loading bar based on the loading status.
  * 
  */
@@ -56,4 +67,4 @@ function setLoadingStatus() {
  * Exporting the functions to be used in other modules.
  * 
  */
-export { getLoadingStatus, initializeLoadingBar };
+export { getLoadingStatus, initializeLoadingBar, loadingBarSubSite };

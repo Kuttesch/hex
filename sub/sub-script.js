@@ -13,6 +13,7 @@ import { setSizeOnClick } from '../modules/onClick.js';
 import { setValues, initializeValues } from '../modules/values.js';
 import { reloadSubSite } from '../modules/onClick.js';
 import { initializeTheme, toggleTheme } from '../modules/darkmode.js';
+import { loadingBarSubSite } from '../modules/progressBar.js';
 
 function setTitle(){
   const title = document.getElementById('shade-0');
@@ -33,6 +34,7 @@ window.addEventListener('click', function() {
 });
 
 function main() {
+  loadingBarSubSite();
   initializeTheme();
   setTitle();
   setShades();
