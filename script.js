@@ -11,6 +11,7 @@ import { randomHexCodeColor } from './modules/color.js';
 import { toggleSidebar } from './modules/onClick.js';
 import { createAndAppendDiv, removeDiv } from './modules/gridItem.js';
 import { setGridElementSize } from './modules/itemSelection.js';
+import { initializeLoadingBar} from './modules/progressBar.js';
 
 /**
  * Number of divs to be appended to the page when the user scrolls to the bottom.
@@ -87,6 +88,7 @@ function main() {
   }
   switchColorTitle();
   setGridElementSize();
+  initializeLoadingBar();
 }
 
 /**

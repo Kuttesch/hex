@@ -36,6 +36,15 @@ body {
   user-select: none;
 }
 
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background-color: #000000;
+}
+
 .sidebar-button-container {
   z-index: 2;
   position: fixed;

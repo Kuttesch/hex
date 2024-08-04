@@ -13,6 +13,7 @@
 import { copyToClipboard, redirect } from './onClick.js';
 import { randomUniqueHexCodeColor, setFontColor } from './color.js';
 import { clickColorCard } from './itemSelection.js';
+import { getLoadingStatus } from './progressBar.js';
 
 /**
  * Variable to keep track of the number of grid items.
@@ -39,6 +40,7 @@ function createAndAppendDiv() {
   newDiv.innerHTML = gridItemCounter;
 
   container.appendChild(newDiv);
+  getLoadingStatus();
 }
 
 function removeDiv(DivNumber) {
