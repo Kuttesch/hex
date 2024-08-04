@@ -3,7 +3,8 @@
  *  
  * @module gridItem
  * 
- * @exports createAndAppendDiv
+ * @exports appendDivsOnScroll
+ * @exports createNumOfDivs
  * @exports appendInnerDiv
  * @exports removeInnerDiv
  * @exports getGridElementSize
@@ -17,9 +18,37 @@ import { getLoadingStatus } from './progressBar.js';
 
 /**
  * Variable to keep track of the number of grid items.
+ * Number of divs to be appended to the page when the user scrolls to the bottom.
+ * Counter to keep track of the number of divs appended to the page.
+ * 
  */
 let gridItemCounter = 0;
+const numDivs = 2000;
+let numDivCounter = 0;
 
+function appendDivsOnScroll() {
+  const scrollY = window.scrollY;
+  const viewportHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  if (scrollY + viewportHeight >= documentHeight - 100) {
+    numDivCounter++;
+    console.log(numDivCounter);
+    console.log('Bottom of the page ' + (numDivCounter * numDivs));
+    for (let i = 0; i < numDivs; i++) {
+        createAndAppendDiv();
+      }
+      deleteTopDivs(); 
+    }
+}
+/**
+ * Function to create a specified number of divs using the createAndAppendDiv function.
+ */
+function createNumOfDivs() {
+  for (let i = 0; i < numDivs; i++) {
+    createAndAppendDiv();
+  }
+}
 
 /**
  * Function to create a new div element and append it to the color grid.
@@ -41,6 +70,23 @@ function createAndAppendDiv() {
 
   container.appendChild(newDiv);
   getLoadingStatus();
+}
+
+/**
+ * Function to delete the top 2000 divs when the user scrolls to the bottom of the page.
+ * 
+ */
+function deleteTopDivs() {
+  if ((numDivCounter * numDivs) >= numDivs * 2) {
+    let divsToDeleteFrom = (numDivCounter * numDivs) - (numDivs * 2) + 1;
+    let divsToDeleteTo = ((numDivCounter * numDivs) - numDivs) + 1;
+    for (let i = divsToDeleteFrom; i < divsToDeleteTo; i++) {
+      removeDiv(i);
+    }
+  } else {
+    console.log('No divs to delete');
+  }
+
 }
 
 function removeDiv(DivNumber) {
@@ -65,9 +111,9 @@ function appendInnerDiv(div,color) {
     const newDivExpandButton = document.createElement('div');
   
     newDivContent.classList.add('grid-item-content');
-  
+
     newDivTopContent.classList.add('grid-item-top-content');
-  
+
     newDivBottomContent.classList.add('grid-item-bottom-content');
     newDivBottomContent.onclick = copyToClipboard;
   
@@ -82,7 +128,6 @@ function appendInnerDiv(div,color) {
     newDivExpandButton.innerHTML = 'open_in_new';
     newDivExpandButton.style.color = setFontColor(newDivExpandButton,color);
     newDivExpandButton.onclick = redirect;
-  
   
     newDivTopContent.appendChild(newDivExpandButton);
     newDivBottomContent.appendChild(newDivText);
@@ -116,4 +161,4 @@ function appendInnerDiv(div,color) {
 /**
  * Export the functions to be used in other modules.
  */
-export { appendInnerDiv, removeDiv, removeInnerDiv, createAndAppendDiv, getGridElementSize};
+export { appendDivsOnScroll, createNumOfDivs, appendInnerDiv, removeInnerDiv, getGridElementSize};
