@@ -14,11 +14,20 @@ body{
     user-select: none;
 }
 
+.loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 5px;
+    background-color: #000000;
+  }
+  
 .reload-container {
     z-index: 2;
     position: fixed;
     top: 1vh;
-    right: 1vw;
+    right: 5vw;
     font-weight: bold;
     color: #000000;
     transition: all 0.3s ease;
@@ -33,6 +42,17 @@ body{
     transform: scale(1.2);
 }
 
+.theme-button {
+    position: fixed;
+    top: 1vh;
+    right: 1vw;
+    font-size: 2em !important;
+    transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+    transform: scale(1.2);
+}
 
 .main{
     display: flex;
@@ -87,7 +107,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 49vw;
-    height: 49vh;
+    height: 100vh;
     margin-top: 0.5vh;
     margin-bottom: 0.5vh;
 
@@ -108,7 +128,9 @@ body{
     font-weight: bold;
     text-transform: uppercase;
     color: #000000;
-    background-color: #c0c0c0;
+    /* background-color: #c0c0c0; */
+    border: 2px solid;
+    border-color: #000000;
 }
 
 .value-text {
@@ -116,6 +138,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 90%;
+    transition: all 0.3s ease;  
 }
 
 .copy-icon {

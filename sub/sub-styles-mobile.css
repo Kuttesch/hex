@@ -1,0 +1,23 @@
+@media (max-width: 600px) {
+    .value {
+        text-transform: none;
+    }
+    .value-text {
+        width: 100%;
+        font-size: 5vw;
+    }
+    .copy-icon {
+        width: 0;
+        visibility: hidden;
+    }
+
+    .reload-container {
+        top: 5vh;
+        right: 5vw;
+    }
+
+    .theme-button {
+        top: 1vh;
+        right: 5vw;
+    }
+}

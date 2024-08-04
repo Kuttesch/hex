@@ -1,0 +1,23 @@
+@media (max-width: 600px) {
+    
+    .header {
+        margin-left: 5vw;
+    }
+    
+    .grid-item-content {
+        flex-direction: row-reverse;
+    }
+    .grid-item-top-content {
+        margin: 0;
+        height: 100%;
+        width: 30%;
+        justify-content: center;
+    }
+    .grid-item-bottom-content {
+        margin: 0;
+        height: 100%;
+        width: 40%;
+    }
+
+
+}
