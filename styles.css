@@ -90,12 +90,12 @@ body {
 
 .saved-text, .templates-text {
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: all 0s ease;
 }
 
 .saved-text.expanded, .templates-text.expanded {
   visibility: visible;
-  transition: all 0.1s ease;
+  transition: all 0s ease;
 }
 
 .sidebar-footer {
@@ -103,10 +103,12 @@ body {
   position: fixed;
   left: 1vw;
   bottom: 1vh;
+  transition: all 0s ease;
 }
 
 .sidebar-footer.expanded {
   visibility: visible;
+  transition: all 0s ease;
 }
 
 .sidebar-button {
