@@ -54,15 +54,25 @@ function copyToClipboard() {
  * Function to toggle the sidebar.
  * 
  */
-/* function toggleSidebar() {
+function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
+  const sidebarButton = document.getElementById('sidebar-button');
   const main = document.getElementById('main');
   const colorGrid = document.getElementById('color-grid');
 
   sidebar.classList.toggle('expanded');
+  sidebarButton.classList.toggle('expanded');
   main.classList.toggle('expanded');
   colorGrid.classList.toggle('expanded');
-} */
+  toggleSidebarText();
+}
+
+function toggleSidebarText() {
+  const text = document.querySelectorAll('.sidebar-text');
+  text.forEach((element) => {
+    element.classList.toggle('expanded');
+  });
+}  
 
 /**
  * Function to resize the shade divs on click so the selected shade is the largest.
@@ -153,6 +163,4 @@ function reloadSubSite() {
  * Export the functions to be used in other modules.
  * 
  */
-export { redirect, copyToClipboard, shadesOnClick, setSizeOnClick, valueOnClick, reloadSubSite };
-
-/* toggleSidebar, */
+export { redirect, copyToClipboard, toggleSidebar, shadesOnClick, setSizeOnClick, valueOnClick, reloadSubSite };

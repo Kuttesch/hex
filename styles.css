@@ -45,30 +45,14 @@ body {
   background-color: #000000;
 }
 
-/* .sidebar-button-container {
-  z-index: 2;
-  position: fixed;
-  top: 1vh;
-  left: 1vw;
-  font-weight: bold;
-  color: #000000;
-  transition: all 0.3s ease;
-}
-
-.sidebar-button {
+.button {
   font-size: 2em !important;
-  transition: all 0.1s ease;
 }
-
-.sidebar-button:hover {
-  transform: scale(1.2);
-} */
 
 .theme-button {
   position: fixed;
   top: 1vh;
   right: 1vw;
-  font-size: 2em !important;
   transition: all 0.3s ease;
 }
 
@@ -78,22 +62,66 @@ body {
 
 .sidebar {
   position: fixed;
-  left: 0;
-  bottom: 0;
-  visibility: hidden;
+  left: 1vw;
+  top: 0;
+  width: 4vw;
+  height: 99vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 15vw;
-  height: 100vh;
-  border-right: 1px solid black;
-  transform: translateX(-100%);
+  justify-content: start;
+  align-items: start;
+  /* border-right: 1px solid black; */
 }
 
 .sidebar.expanded {
+  width: 15vw;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.saved-button, .templates-button {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-right: 1vw;
+}
+
+.saved-text, .templates-text {
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.saved-text.expanded, .templates-text.expanded {
   visibility: visible;
-  transform: translateX(0);
+  transition: all 0.1s ease;
+}
+
+.sidebar-footer {
+  visibility: hidden;
+  position: fixed;
+  left: 1vw;
+  bottom: 1vh;
+}
+
+.sidebar-footer.expanded {
+  visibility: visible;
+}
+
+.sidebar-button {
+  padding-top: 1vh;
+  padding-bottom: 2vh;
+  font-size: 2em !important;
+  transition: all 0.1s ease;
+}
+
+.sidebar-button.expanded {
+  rotate: 90deg;
+}
+
+.sidebar-button:hover, .saved-button:hover, .templates-button:hover {
+  transform: scale(1.2);
 }
 
 .main {
@@ -148,7 +176,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 0%;
+  bottom: 2vh;
   width: 100%;
   color: black;
   transition: all 0.1s ease;
@@ -173,7 +201,7 @@ h1 {
 
 .color-grid {
   height: auto;
-  width: 90vw;
+  width: 88vw;
   /* width: 88vw; */
   display: grid;
   grid-template-columns: repeat(
