@@ -203,7 +203,7 @@ h1 {
 
 .color-grid {
   height: auto;
-  width: 88vw;
+  width: 90vw;
   /* width: 88vw; */
   display: grid;
   grid-template-columns: repeat(
