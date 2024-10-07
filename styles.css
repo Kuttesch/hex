@@ -70,6 +70,7 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  overflow: hidden;
   /* border-right: 1px solid black; */
 }
 
@@ -99,16 +100,17 @@ body {
 }
 
 .sidebar-footer {
-  visibility: hidden;
+  /* visibility: hidden; */
   position: fixed;
-  left: 1vw;
+  left: -10vw;
   bottom: 1vh;
-  transition: all 0s ease;
+  /* transition: all 0s ease; */
 }
 
 .sidebar-footer.expanded {
-  visibility: visible;
-  transition: all 0s ease;
+  left: 1vw;
+  /* visibility: visible; */
+  /* transition: all 0s ease; */
 }
 
 .sidebar-button {
@@ -213,8 +215,7 @@ h1 {
   grid-auto-rows: var(--grid-item-size);
   gap: 0.5vw;
   justify-content: center;
-  transition: all 0.5s ease;
-}
+  /* transition: all 0.5s ease; */}
 
 .color-grid.expanded {
   width: 82vw;
@@ -228,14 +229,15 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.5s ease;
-  /* transition: none; */
+  /* transition: all 0.5s ease; */
+  transition: none;
 }
 
 .grid-item-content {
     visibility: hidden;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
+    flex-direction: row-reverse;
     width: 100%;
     height: 100%;
   }
@@ -244,15 +246,23 @@ h1 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 90%;
-    height: 40%;
-    margin: 5%;
+    margin: 0;
+    height: 100%;
+  }
+
+  .grid-item-top-content {
+    margin: 0;
+    height: 100%;
+    width: 30%;
+    justify-content: center;
   }
   
   .grid-item-bottom-content {
    justify-content: center;
    font-size: 1.5em !important;
    font-weight: bold;
+   width: 50%;
+   margin-left: 20%;
   }
   
   
@@ -267,7 +277,7 @@ h1 {
   
   .grid-item.selected {
     border-radius: 10px;
-    transition: all 0.5s ease;
+    /* transition: all 0.5s ease; */
     background-color: #f0f0f0;
   }
   
