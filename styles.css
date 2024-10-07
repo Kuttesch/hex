@@ -61,6 +61,7 @@ body {
 }
 
 .sidebar {
+  visibility: hidden;
   position: fixed;
   left: 1vw;
   top: 0;
