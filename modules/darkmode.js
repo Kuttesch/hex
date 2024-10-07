@@ -4,7 +4,7 @@
  * @module darkmode
  */
 
-import { initializeFontAndBorderColors } from "./color.js";
+import { initializeFontAndBorderColors, setBackgroundColorAndText } from "./color.js";
 
 /**
  * Variable to keep track of the current theme.
@@ -47,9 +47,10 @@ function saveTheme() {
 function switchToLightMode(){
     const button = document.getElementById('theme-button');
     const body = document.body;
+    darkMode = false;
     button.innerText = 'dark_mode';
     body.style.backgroundColor = '#f0f0f0';
-    darkMode = false;
+    elementSwitchTheme();
     console.log('Light Mode');
 }
 
@@ -60,9 +61,10 @@ function switchToLightMode(){
 function switchToDarkMode(){
     const button = document.getElementById('theme-button');
     const body = document.body;
+    darkMode = true;
     button.innerText = 'light_mode';
     body.style.backgroundColor = '#141314';
-    darkMode = true;
+    elementSwitchTheme();
     console.log('Dark Mode');
 }
 
@@ -78,6 +80,14 @@ function toggleTheme() {
     }
     saveTheme();
     initializeFontAndBorderColors();
+}
+
+function elementSwitchTheme() {
+    const divs = document.querySelectorAll('.switch-backgroundcolor');
+    divs.forEach(div => {
+        div.style.backgroundColor = darkMode ? '#141314' : '#f0f0f0';
+      });
+    console.log('Element Switch Themeto', darkMode ? 'Dark Mode' : 'Light Mode');
 }
 
 /**

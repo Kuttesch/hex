@@ -65,6 +65,7 @@ function createAndAppendDiv() {
   let color = randomUniqueHexCodeColor();
   newDiv.dataset.value = color;
   newDiv.style.backgroundColor = color;
+  // newDiv.innerHTML = gridItemCounter;
 
   /* newDiv.innerHTML = gridItemCounter; */
 
@@ -93,6 +94,52 @@ function removeDiv(DivNumber) {
   const container = document.querySelector('.color-grid');
   const div = document.getElementById('grid-item-' + DivNumber);
   container.removeChild(div);
+}
+
+function removeAndRememberDiv(DivNumber1, DivNumber2) {
+  const container = document.querySelector('.color-grid');
+  const div1 = document.getElementById('grid-item-' + DivNumber1);
+  const div2 = document.getElementById('grid-item-' + DivNumber2);
+
+  localStorage.setItem('removedDiv1Number', div1.dataset.number);
+  localStorage.setItem('removedDiv1Color', div1.dataset.value);
+
+  localStorage.setItem('removedDiv2Number', div2.dataset.number);
+  localStorage.setItem('removedDiv2Color', div2.dataset.value);
+
+  container.removeChild(div1);
+  container.removeChild(div2);
+}
+
+function appendRemeberedDivs() {
+  const container = document.querySelector('.color-grid');
+  console.log("appendRememberedDivs");
+  const nextExistingDiv = document.getElementById('grid-item-' + parseInt(parseInt(localStorage.getItem('removedDiv2Number')) + 1));
+
+  const newDiv1 = document.createElement('div');
+  newDiv1.classList.add('grid-item');
+  newDiv1.id = 'grid-item-' + parseInt(localStorage.getItem('removedDiv1Number'));
+  newDiv1.dataset.number = parseInt(localStorage.getItem('removedDiv1Number'));
+  newDiv1.onclick = clickColorCard;
+  let color = localStorage.getItem('removedDiv1Color');
+  newDiv1.dataset.value = color;
+  newDiv1.style.backgroundColor = color;
+  // newDiv1.innerHTML = parseInt(localStorage.getItem('removedDiv1Number'));
+
+  const newDiv2 = document.createElement('div');
+  newDiv2.classList.add('grid-item');
+  newDiv2.id = 'grid-item-' + parseInt(localStorage.getItem('removedDiv2Number'));
+  newDiv2.dataset.number = parseInt(localStorage.getItem('removedDiv2Number'));
+  newDiv2.onclick = clickColorCard;
+  color = localStorage.getItem('removedDiv2Color');
+  newDiv2.dataset.value = color;
+  newDiv2.style.backgroundColor = color;
+  // newDiv2.innerHTML = parseInt(localStorage.getItem('removedDiv2Number'));
+  
+  container.insertBefore(newDiv2, nextExistingDiv);
+  console.log(newDiv2, nextExistingDiv);
+  container.insertBefore(newDiv1, newDiv2);
+  console.log(newDiv1, newDiv2);
 }
 
 /**
@@ -161,4 +208,4 @@ function appendInnerDiv(div,color) {
 /**
  * Export the functions to be used in other modules.
  */
-export { appendDivsOnScroll, createNumOfDivs, appendInnerDiv, removeInnerDiv, getGridElementSize};
+export { appendDivsOnScroll, createNumOfDivs, appendInnerDiv, removeInnerDiv, getGridElementSize, removeAndRememberDiv, appendRemeberedDivs};

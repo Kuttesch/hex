@@ -19,5 +19,8 @@
         width: 40%;
     }
 
+    .sidebar {
+        visibility: hidden;
+    }
 
 }

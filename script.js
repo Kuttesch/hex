@@ -8,7 +8,7 @@
 */
 
 import { randomHexCodeColor } from './modules/color.js';
-/* import { toggleSidebar } from './modules/onClick.js'; */
+import { toggleSidebar } from './modules/onClick.js';
 import { appendDivsOnScroll, createNumOfDivs} from './modules/gridItem.js';
 import { setGridElementSize } from './modules/itemSelection.js';
 import { initializeLoadingBar} from './modules/progressBar.js';
