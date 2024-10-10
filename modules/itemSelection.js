@@ -7,7 +7,7 @@
  * @exports setGridElementSize
  * 
  */
-import { appendInnerDiv, removeInnerDiv } from "./gridItem.js";
+import { appendInnerDiv, appendRemeberedDivs, removeAndRememberDiv, removeInnerDiv } from "./gridItem.js";
 import { getGridElementSize } from "./gridItem.js";
 
 /**
@@ -72,6 +72,7 @@ function deselectItem(selectionStat) {
     selectedDiv.style.backgroundColor = selectedDiv.dataset.value;
     selectedDiv.style.marginLeft = "0";
     selectedDiv.style.marginTop = "0";
+    appendRemeberedDivs();
     resetGridPosition(selectedDiv.id);
     removeInnerDiv(selectedDiv.id);
 }
@@ -80,8 +81,8 @@ function deselectItem(selectionStat) {
  * Variables to store the number of columns and rows the selected color card should span.
  * Easy to adjust for different screen sizes or layouts.
  */
-var ItemSpanColumn = 2;
-var ItemSpanRow = 2;
+var ItemSpanColumn = 3;
+var ItemSpanRow = 1;
 /**
  * If the window width is less than 600px, the number of columns and rows the selected color card should span is adjusted.
  * This assures that the selected color card is displayed correctly and aesthetically pleasing on mobile devices.
@@ -103,6 +104,7 @@ function setGridPosition(div) {
     const gridContainer = document.getElementById("color-grid");
     const Viewport = window.innerWidth;
     const gridItem = document.getElementById(div);
+    const gridItemNumber = parseInt(gridItem.dataset.number);
     // The gap between the grid items is set to 0.5% of the viewport width. This value comes from the CSS grid-gap property.
     const gap = 0.005 * Viewport;
     // The size of a grid item is set to 5% of the viewport width. This value comes from the CSS --grid-item-size property set for larger screens.
@@ -130,13 +132,28 @@ function setGridPosition(div) {
     const ItemPositionRow = ((ItemNumber - 1) % itemsPerRow) + 1;
     const ItemPositionColumn = Math.floor((ItemNumber - 1) / itemsPerRow) + 1;
 
-    if (ItemPositionRow > itemsPerRow - ItemSpanColumn + 1) {
+    if (ItemPositionRow > itemsPerRow - ItemSpanColumn + 2) {
         const start = document.getElementById(
             "grid-item-" + (itemsPerRow * ItemPositionColumn - (ItemSpanColumn - 1))
         );
         if (start) {
             gridContainer.insertBefore(gridItem, start);
         }
+        removeAndRememberDiv(gridItemNumber - 2, gridItemNumber - 1);
+
+
+    } else if (ItemPositionRow > itemsPerRow - ItemSpanColumn + 1) {
+        const start = document.getElementById(
+            "grid-item-" + (itemsPerRow * ItemPositionColumn - (ItemSpanColumn - 2))
+        );
+        if (start) {
+            gridContainer.insertBefore(gridItem, start);
+        }
+        removeAndRememberDiv(gridItemNumber - 1, gridItemNumber + 1);
+
+
+     } else {
+        removeAndRememberDiv(gridItemNumber + 1, gridItemNumber + 2);
     }
     // The necessary CSS properties are set to position the selected color card in the grid.
     gridItem.style.gridColumn = "span " + ItemSpanColumn;
