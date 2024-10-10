@@ -16,7 +16,7 @@ HEX! is a web based color for designers to find the perfect color for their proj
 
 ## Usage
 
-Just visit HEX! at [https://gethex.vercel.app/](https://gethex.vercel.app/) and start finding the perfect color for your project.
+Just visit HEX! at [www.gethex.de](https://gethex.de/) and start finding the perfect color for your project.
 
 
 
