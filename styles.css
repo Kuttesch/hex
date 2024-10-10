@@ -45,6 +45,18 @@ body {
   background-color: #000000;
 }
 
+.impressum {
+  position: fixed;
+  right: 1vw;
+  bottom: 0;
+  padding-bottom: 1vh;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #f0f0f0;
+  z-index: 1;
+}
+
 /* .sidebar-button-container {
   z-index: 2;
   position: fixed;
