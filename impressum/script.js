@@ -1,4 +1,6 @@
 import { initializeTheme, toggleTheme } from '../modules/darkmode.js';
+import { loadingBarSubSite } from '../modules/progressBar.js';
+
 
 window.addEventListener('click', function() {
     const themeButton = document.getElementById('theme-button');
@@ -6,6 +8,7 @@ window.addEventListener('click', function() {
   });
 
 function main() {
+    loadingBarSubSite();
     initializeTheme();
 }
 

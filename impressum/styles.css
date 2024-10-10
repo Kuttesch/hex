@@ -63,11 +63,20 @@ body {
     transform: scale(1.2);
 }
 
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background-color: #000000;
+}
+
 .main {
     margin-left: 20vw;
     margin-right: 20vw;
     margin-top: 6vh;
-    width: 100vw;
+    width: 60vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
