@@ -2,23 +2,20 @@
 
 HEX! is a web based color for designers to find the perfect color for their projects.
 
-*More Details coming soon!!*
+_More Details coming soon!!_
 
 ## Table of Contents
 
-
 - [HEX!](#hex)
-  - [Table of Contents](#table-of-contents)
-  - [Usage](#usage)
-  - [Bugs](#bugs)
-  - [Contributing](#contributing)
-  - [License](#license)
+    - [Table of Contents](#table-of-contents)
+    - [Usage](#usage)
+    - [Bugs](#bugs)
+    - [Contributing](#contributing)
+    - [License](#license)
 
 ## Usage
 
 Just visit HEX! at [www.gethex.de](https://gethex.de/) and start finding the perfect color for your project.
-
-
 
 ## Bugs
 
